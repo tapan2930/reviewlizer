@@ -3,6 +3,7 @@ import requests
 import lxml
 import math
 import re
+import numpy as np
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
@@ -115,7 +116,7 @@ def URL_GEN(url:str):
     else:
         total_pages = review_details[2]
 
-    urls = [url+f"ref=cm_cr_getr_d_paging_btm_next_2?ie=UTF8&reviewerType=avp_only_reviews&pageNumber={page+1}" for page in range(2) ]
+    urls = [url+f"ref=cm_cr_getr_d_paging_btm_next_2?ie=UTF8&reviewerType=avp_only_reviews&pageNumber={page+1}" for page in range(total_pages) ]
     return urls
 
 
@@ -132,8 +133,12 @@ def main(url:str):
         results = []
         for result in as_completed(futures):
             results.append(result.result())
-        
-    return (len(results[0]),len(results[1]))   
+
+    shape = len(results) * 10
+    arr = np.array(results)
+    arr = arr.reshape(shape)    
+
+    return arr.tolist()
 
 r = main("https://www.amazon.in/OnePlus-Mirror-Black-128GB-Storage/dp/B085J1CPD1/ref=sr_1_2?crid=4BG07GLT6YW8&dchild=1&keywords=oneplus+nord&qid=1606831284&sprefix=oneplus%2Caps%2C281&sr=8-2")   
 print(r)
