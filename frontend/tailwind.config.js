@@ -1,5 +1,5 @@
 module.exports = {
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -15,7 +15,12 @@ module.exports = {
       },
       fontFamily: {
         'body': 'Nunito'
-      }
+      },
+      colors: {
+        'primaryPink': "#F31868",
+        'secondaryPink': "rgba(242,24,104,0.1)",
+        'gray-900': "#131414"
+      },
     },
   },
   variants: {
