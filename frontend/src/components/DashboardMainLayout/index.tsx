@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {AiOutlineSearch} from 'react-icons/ai'
+import SearchBar from '../SearchBar';
 import GridTable from './components/GridTable';
+
 
 const Saved = {
     title : "Saved",
@@ -74,15 +75,13 @@ const previouslySearched = {
     ]
 }
 
-const MainLayout = () => {
-    const [searchValue, setSearchValue] = useState("")
-
+const DashboardMainLayout = () => {
+    
     return (
-        <div className="grid grid-rows-3 md:grid-rows-2 content-end h-screen ">
-            <div className="flex items-center justify-center">
+        <div className="h-full">
+            <div className="flex items-center justify-center my-16">
                 <div className="w-full sm:w-8/12 flex">
-                    <input className="py-4 px-4 w-full  inline-block bg-secondaryPink" type="text" value={searchValue} placeholder="Search..." onChange={(e)=> setSearchValue(e.target.value)} />
-                    <button className="bg-primaryPink text-gray-50 py-4 px-6"><span className=" text-lg inline sm:hidden"><AiOutlineSearch/></span><span className="hidden sm:inline "> Search </span> </button>
+                   <SearchBar />
                 </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 pt-8">
@@ -105,4 +104,4 @@ const MainLayout = () => {
     )
 }
 
-export default MainLayout
+export default DashboardMainLayout

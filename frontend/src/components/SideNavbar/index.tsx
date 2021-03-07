@@ -37,7 +37,7 @@ const navLinks = [
 const SideNavbar = ()=>{
     let isNavbar = useNavbarToggle()
     return (
-        <div className={`${isNavbar ? " fixed " : " static "}` + " h-full w-16 bottom-0 top-0 items-center pt-16  bg-white dark:border-gray-800 border-r  dark:bg-gray-900 dark:text-gray-50"}>
+        <div className={`${isNavbar ? " fixed  " : " static "}` + " h-full w-16 bottom-0 top-0 items-center pt-16  bg-white dark:border-gray-800 border-r  dark:bg-gray-900 dark:text-gray-50"}>
  
             <div className="flex flex-col">
                 {

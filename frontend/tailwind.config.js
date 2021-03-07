@@ -6,7 +6,7 @@ module.exports = {
       container: {
         center: true,
         padding: {
-          DEFAULT: '1rem',
+          DEFAULT: '2px',
           sm: '2rem',
           lg: '4rem',
           xl: '5rem',
@@ -19,12 +19,16 @@ module.exports = {
       colors: {
         'primaryPink': "#F31868",
         'secondaryPink': "rgba(242,24,104,0.1)",
-        'gray-900': "#131414"
+        'gray-900': "#131414",
+        'd-bg-container':"#212424",
+        'd-secondary':'#1a1f1f'
       },
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      backgroundColor: ['odd'],
+    },
   },
   plugins: [],
 }

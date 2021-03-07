@@ -13,7 +13,8 @@ const TopNavbar = ()=>{
 
 
     return (
-        <div className="h-14 md:h-16 flex items-center bg-white dark:bg-gray-900 dark:text-gray-50 border-b dark:border-gray-800">
+        <div className="sticky top-0 w-full z-10">
+             <div className="h-14 md:h-16 flex items-center bg-white dark:bg-gray-900 dark:text-gray-50 border-b dark:border-gray-800">
             {/* Sidebar hamburger */}
             <div className="w-16 h-14 md:h-16 flex items-center justify-center">
                 <span onClick={()=>toggleNavbar()} className="cursor-pointer"><FaBars /></span>
@@ -46,6 +47,8 @@ const TopNavbar = ()=>{
             </div>
        
         </div>
+        </div>
+       
     )
 }
 

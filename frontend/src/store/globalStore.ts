@@ -1,5 +1,6 @@
 import create from "zustand"
 
+
 export type useDarkModeType =  {
     theme:boolean,
     toggle: () => void
@@ -25,5 +26,28 @@ export const useNavbarToggle = create<useNavbarToggleType>( (set) =>({
     }))
 }))
 
+// export type useSearchValueType =  {
+//     seachValue:string,
+//     setSearchValue: (value:string) => void
+// }
 
 
+// export const useSearchValue = create<useSearchValueType>( (set) =>({
+//     searchValue: "",
+//     setSearchValue: (value) => set((state) =>({
+//         searchValue: value
+//     }))
+// }))
+
+
+export type useSearchValueType =  {
+    searchValue:string,
+    setSearchValue: (value) => void
+}
+
+export const useSearchValue = create<useSearchValueType>( (set) =>({
+    searchValue: "",
+    setSearchValue: (value) => set((state) => ({
+        searchValue: value
+    }))
+}))
