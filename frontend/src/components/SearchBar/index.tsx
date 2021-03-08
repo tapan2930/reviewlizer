@@ -2,26 +2,34 @@ import React from "react";
 import Router from "next/router";
 import { AiOutlineSearch } from "react-icons/ai";
 
-import { useSearchValue } from "../../store/globalStore";
+import { useSearchValue, useSkeleton } from "../../store/globalStore";
   
 type propType = {
-    onSearch?: (data) => void
+    onSearch?: (data) => void,
+    showAnlaysisHandler?: () => void
 }
 
-const SearchBar:React.FC<propType> = ({onSearch}):React.ReactElement => {
+const SearchBar:React.FC<propType> = ({onSearch,showAnlaysisHandler}):React.ReactElement => {
+  const setSkeletonLoading = useSkeleton(state => state.toggle)
   const searchValue = useSearchValue((state) => state.searchValue);
   const setSearchValue = useSearchValue((state) => state.setSearchValue);
+
   const onSearchButtonHandler = async () => {
+    
     if (searchValue) {
       const route = Router.pathname;
       if (route === "/dashboard") {
         Router.push("/dashboard/analysis");
       }
-    
+
+      setSkeletonLoading(true)
+
+      console.log(showAnlaysisHandler)
       await setTimeout(()=>{
           console.log("waiting....getting data")
           let data = TesterFunction(); 
-          onSearch(data) 
+            onSearch(data)
+            setSkeletonLoading(false)
           console.log("got data")  
         },1000)
     }
@@ -38,9 +46,9 @@ const SearchBar:React.FC<propType> = ({onSearch}):React.ReactElement => {
       />
       <button
         onClick={() => onSearchButtonHandler()}
-        className="bg-primaryPink text-gray-50 py-4 px-6"
+        className="bg-primaryPink text-gray-50 py-4 px-6 flex items-center"
       >
-        <span className=" text-lg inline sm:hidden">
+        <span className=" text-xl inline sm:mr-2 ">
           <AiOutlineSearch />
         </span>
         <span className="hidden sm:inline "> Search </span>{" "}

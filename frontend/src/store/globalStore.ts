@@ -26,20 +26,6 @@ export const useNavbarToggle = create<useNavbarToggleType>( (set) =>({
     }))
 }))
 
-// export type useSearchValueType =  {
-//     seachValue:string,
-//     setSearchValue: (value:string) => void
-// }
-
-
-// export const useSearchValue = create<useSearchValueType>( (set) =>({
-//     searchValue: "",
-//     setSearchValue: (value) => set((state) =>({
-//         searchValue: value
-//     }))
-// }))
-
-
 export type useSearchValueType =  {
     searchValue:string,
     setSearchValue: (value) => void
@@ -51,3 +37,16 @@ export const useSearchValue = create<useSearchValueType>( (set) =>({
         searchValue: value
     }))
 }))
+
+
+export type useSkeletonType =  {
+    loading:boolean,
+    toggle: (value:boolean) => void
+}
+
+export const useSkeleton = create<useSkeletonType>(set  => ({
+    // theme : localStorage.getItem("userTheme") || "light",
+    loading: false,
+    toggle: (value) => set(state => ({ loading: value}))
+}) )
+

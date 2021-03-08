@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 import TopNavbar from '../src/components/TopNavbar/index';
 import SideNavbar from '../src/components/SideNavbar/index';
 import DashboardMainLayout from "../src/components/DashboardMainLayout/index";
