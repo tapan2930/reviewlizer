@@ -9,8 +9,8 @@ module.exports = {
           DEFAULT: '2px',
           sm: '2rem',
           lg: '4rem',
-          xl: '5rem',
-          '2xl': '6rem',
+          xl: '8rem',
+          '2xl': '8rem',
         }
       },
       fontFamily: {
@@ -23,6 +23,9 @@ module.exports = {
         'd-bg-container':"#212424",
         'd-secondary':'#1a1f1f'
       },
+      transitionProperty: {
+        'width': 'width'
+       }
     },
   },
   variants: {

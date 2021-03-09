@@ -79,8 +79,8 @@ const DashboardMainLayout = () => {
     
     return (
         <div className="h-full">
-            <div className="flex items-center justify-center my-16">
-                <div className="w-full sm:w-8/12 flex">
+            <div className="flex container items-center justify-center my-16">
+                <div className="w-full flex">
                    <SearchBar onSearch = {null} />
                 </div>
             </div>

@@ -38,10 +38,10 @@ const SearchBar:React.FC<propType> = ({onSearch,showAnlaysisHandler}):React.Reac
   return (
     <>
       <input
-        className="outline-none hover:outline-none py-4 px-4 w-full  inline-block bg-secondaryPink"
+        className="outline-none  py-4 px-4 w-full bg-secondaryPink inline-block "
         type="text"
         value={searchValue}
-        placeholder="Search..."
+        placeholder="Insert Product link ..."
         onChange={(e) => setSearchValue(e.target.value)}
       />
       <button

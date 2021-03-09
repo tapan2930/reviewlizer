@@ -16,11 +16,11 @@ const validationYupSchema = Yup.object({
 const SignIn: React.FC = (): React.ReactElement => {
   return (
     <div className="container h-screen overflow-y-hidden">
-      <div className="inline-flex fixed top-0   cursor-pointer items-center font-semibold text-sm p-2 text-gray-800">
-        <span className="mr-2 text-lg">
+      <div onClick={()=>{ Router.push("/")}} className="inline-flex fixed top-0   cursor-pointer items-center font-semibold text-sm p-2 text-gray-800">
+        <span className="mr-2 text-lg" >
           <HiArrowNarrowLeft />
         </span>
-        <span>Back</span>
+        <span>Back To Home</span>
       </div>
       <div className="flex justify-center sm:items-center h-full">
         <div

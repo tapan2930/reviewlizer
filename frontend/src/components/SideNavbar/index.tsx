@@ -34,17 +34,20 @@ const navLinks = [
 
 ]
 
+
+
 const SideNavbar = ()=>{
-    let isNavbar = useNavbarToggle()
+    const isNavbar = useNavbarToggle(state => state.navbar)
+
     return (
-        <div className={`${isNavbar ? " fixed  " : " static "}` + " h-full w-16 bottom-0 top-0 items-center pt-16  bg-white dark:border-gray-800 border-r  dark:bg-gray-900 dark:text-gray-50"}>
- 
-            <div className="flex flex-col">
+        <div className={`  ${isNavbar ? " -left-16 " : " left-0 w-16 "} fixed h-full transition-all duration-200 ease-out z-30 bg-white dark:border-gray-800 border-r  dark:bg-gray-900 dark:text-gray-50`}>
+            
+            <div className="flex flex-col ">
                 {
                     // Mapping each Navigation (icon,name,link) on sidebar
                     navLinks.map((navLink, idx:number)=>{
                         return (
-                            <div id={`${idx}`}> 
+                            <div id={`${idx}`} > 
                                 <NavButton name={navLink.name} link={navLink.link}>
                                     <navLink.icon />
                                 </NavButton>
@@ -54,7 +57,8 @@ const SideNavbar = ()=>{
                 }
         
             </div>
-            
+           
+           
         </div>
     )
 }

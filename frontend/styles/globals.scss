@@ -14,8 +14,8 @@
 
 /* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 12px;
-  height: 4px;
+  width: 0px;
+  height: 3px;
 }
 
 *::-webkit-scrollbar-track {
@@ -35,7 +35,7 @@
 
 /* Works on Chrome, Edge, and Safari */
 .smallSCroll::-webkit-scrollbar {
-  width: 5px;
+  width: 3px;
   height: 1px; 
 }
 
@@ -44,7 +44,18 @@
 }
 
 .smallSCroll::-webkit-scrollbar-thumb {
-  background-color: rgb(54, 53, 53);;
+  background-color: rgb(54, 53, 53);
   border-radius: 5px;
 }
+
+*:focus {
+  outline: 0 !important;
+}
+
+.frost{
+  background: rgba(32, 32, 32, 0.637);
+  backdrop-filter: blur(1px);
+} 
+
+
 
