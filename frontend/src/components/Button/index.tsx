@@ -23,7 +23,7 @@ const MyButton :React.FC<propType> = ({type="primary",display="inline-block",sty
     }
 
     return (
-        <button style={{outline:"none"}} type="button" onClick={()=> onclick && onclick()} className={`px-3 py-2 text-sm  border-primaryPink font-base rounded-md   ${typeStyle(type)} ${display} ${style}`}>{children}</button>
+        <button style={{outline:"none"}} type="submit" onClick={()=> onclick && onclick()} className={`px-3 py-2 text-sm  border-primaryPink font-base rounded-md   ${typeStyle(type)} ${display} ${style}`}>{children}</button>
     )
 }
 
