@@ -7,25 +7,24 @@ import SentimentAnalysisContainer from "./SentimentAnalysis";
 import  {useSkeleton} from "../../store/globalStore"
 
 
-const skeleton = <svg width="632" height="356" viewBox="0 0 632 356" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="skeleton">
-<rect id="skeleton-items" x="366" y="45" width="160" height="33" rx="16" fill="#F21868" fill-opacity="0.1"/>
-<rect id="skeleton-items_2" x="291" y="111" width="300" height="13" rx="6.5" fill="#F21868" fill-opacity="0.1"/>
-<rect id="skeleton-items_3" x="291" y="158" width="300" height="13" rx="6.5" fill="#F21868" fill-opacity="0.1"/>
-<rect id="skeleton-items_4" x="291" y="135" width="300" height="13" rx="6.5" fill="#F21868" fill-opacity="0.1"/>
-<rect id="skeleton-items_5" x="291" y="205" width="300" height="13" rx="6.5" fill="#F21868" fill-opacity="0.1"/>
-<rect id="skeleton-items_6" x="291" y="181" width="300" height="13" rx="6.5" fill="#F21868" fill-opacity="0.1"/>
-<rect id="skeleton-items_7" x="291" y="252" width="300" height="13" rx="6.5" fill="#F21868" fill-opacity="0.1"/>
-<rect id="skeleton-items_8" x="291" y="229" width="300" height="13" rx="6.5" fill="#F21868" fill-opacity="0.1"/>
-<rect id="skeleton-items_9" x="291" y="298" width="300" height="14" rx="7" fill="#F21868" fill-opacity="0.1"/>
-<rect id="skeleton-items_10" x="291" y="274" width="300" height="14" rx="7" fill="#F21868" fill-opacity="0.1"/>
-<circle id="skeleton-items_11" cx="151.5" cy="170.5" r="94.5" fill="#F21868" fill-opacity="0.1"/>
-<rect id="skeleton-items_12" x="65" y="284" width="33" height="24" rx="8" fill="#F21868" fill-opacity="0.1"/>
-<rect id="skeleton-items_13" x="129" y="284" width="33" height="24" rx="8" fill="#F21868" fill-opacity="0.1"/>
-<rect id="skeleton-items_14" x="193" y="284" width="33" height="24" rx="8" fill="#F21868" fill-opacity="0.1"/>
-<rect x="0.5" y="0.5" width="631" height="355" rx="15.5" stroke="#F21868" stroke-opacity="0.3"/>
-</g>
-</svg>
+const skeleton = <div className="flex w-full border dark:border-gray-600 rounded-md p-6 ">
+  <div className="w-full flex flex-col justify-center ">
+    <div className="w-24 h-24 md:h-48 md:w-48 rounded-full bg-gray-300 dark:bg-gray-400 mx-auto mb-6"></div>
+    <div className="flex flex-row justify-around">
+      <div className="w-full mr-2 h-6 md:h-8 rounded-sm bg-gray-300 dark:bg-gray-400"></div>
+      <div className="w-full mr-2 h-6 md:h-8 rounded-sm bg-gray-300 dark:bg-gray-400"></div>
+      <div className="w-full mr-2 h-6 md:h-8 rounded-sm bg-gray-300 dark:bg-gray-400"></div>
+    </div>
+  </div>
+  <div className="w-full flex flex-col justify-between px-6">
+    <div className="w-full h-6 md:h-12 rounded-md bg-gray-300 dark:bg-gray-400 mb-1"></div>
+    <div className="w-full h-6 md:h-12 rounded-md bg-gray-300 dark:bg-gray-400 mb-1"></div>
+    <div className="w-full h-6 md:h-12 rounded-md bg-gray-300 dark:bg-gray-400 mb-1"></div>
+    <div className="w-full h-6 md:h-12 rounded-md bg-gray-300 dark:bg-gray-400 mb-1"></div>
+  </div>
+</div>
+
+
 
 
 
