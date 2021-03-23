@@ -6,6 +6,8 @@ import AccountBase from "../../src/components/AccountBase";
 import axios from "axios"
 import Link from "next/link";
 import {CgSpinner} from "react-icons/cg"
+import Toast from "../../src/components/Toast";
+import {useRouter} from "next/router"
 
 const validationYupSchema = Yup.object({
   password: Yup.string()
@@ -19,35 +21,33 @@ const validationYupSchema = Yup.object({
 
 
 const SignUp:React.FC = ():React.ReactElement => {
-  const [isWaiting, setWaiting] = useState(false)
+
   const [result,setResult] = useState({
     success:false,
-    error:false
+    loading:false,
+    error:false,
   })
 
-  const successMessage = () =>  (<div className={` ${result.success ? "" : "hidden"}`}>
-        <p className="text-center bg-green-200 text-primaryPink p-2 mb-4 rounded-md shadow-md">Successfully Created Account. <Link href={"/account/signin"}><a className=" text-sm text-primaryPink font-semibold border-dotted border-b border-primaryPink  "> Click Here to Sign In</a></Link> </p>
-      </div>)
+  const router = useRouter()
 
-
-
-  const ErrorMessage = () =>  (<div className={` ${result.error ? "" : "hidden"}`}>
-      <p className="text-center bg-red-200 text-primaryPink p-2 mb-4 rounded-md shadow-md">Trouble Creating Account.</p>
-    </div>)
 
     return (
       <AccountBase signType={"Sign Up"}>
-        { successMessage() }
-        { ErrorMessage() }
+        {
+          result.success ? <Toast value="Successfully Created Acount, Redirecting to Login" type="success" /> : ""
+        }
+        {
+          result.error ? <Toast value={"Error Creating Account !"} type="error" hideProgressBar={true} /> : ""
+        }
         <Formik
           initialValues={{ email: "", password: "", confirmationPassword: "" }}
           validationSchema={validationYupSchema}
           onSubmit={  (values) => {
-            setWaiting(true)
-
               setResult({
+                ...result,
                 success:false,
-                error:false
+                error:false,
+                loading:true
               })
 
               let data = {
@@ -61,15 +61,18 @@ const SignUp:React.FC = ():React.ReactElement => {
                   }
               })
               .then( res => {
-                setResult({...result, success:true, error:false})
+                setResult({...result, success:true, error:false, loading:false})
+                setTimeout(()=>{
+                  router.push('/account/signin')
+                },3000)
                 console.log(res)
+
               })
               .catch( err =>{
-                setResult({...result, error:true, success:false})
-                console.log(err)
+                setResult({...result, error:true, success:false, loading:false})
+                console.log(err.error)
+               
               })
-  
-            setWaiting(false)
 
           }}
         >
@@ -137,7 +140,7 @@ const SignUp:React.FC = ():React.ReactElement => {
               >
                 <div className=" w-full h-6 flex justify-center items-center">
                   {
-                    isWaiting ? <span className="animate-spin text-lg mr-1 "><CgSpinner /></span> : ""
+                    result.loading ? <span className="animate-spin text-lg mr-1 "><CgSpinner /></span> : ""
                   }
                  Sign Up
                 </div>

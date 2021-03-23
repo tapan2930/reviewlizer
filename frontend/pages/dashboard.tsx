@@ -1,17 +1,24 @@
 import TopNavbar from '../src/components/TopNavbar/index';
 import SideNavbar from '../src/components/SideNavbar/index';
 import DashboardMainLayout from "../src/components/DashboardMainLayout/index";
+import nookies from 'nookies'
+
 
 import  {useDarkMode, useNavbarToggle} from "../src/store/globalStore"
+import { getUser } from '../src/utils/auth/helper';
 
 
-const DashBoard = ()=>{
+const DashBoard = (props)=>{
     const isDarkMode = useDarkMode(state => state.theme);
     const isNavbar = useNavbarToggle(state => state.navbar)
     const toggleNavbar = useNavbarToggle(state => state.toggle);
 
-
-
+    console.log(props.cookies.fromClient)
+    const token = props.cookies.fromClinet
+    // const user_id = localStorage.getItem("user_id")
+    console.log(token)
+    // const user = getUser(token,user_id)
+    // console.log(user)
 
     return (
         <div className={` ${isDarkMode ? "dark": " "} `}>
@@ -32,6 +39,21 @@ const DashBoard = ()=>{
         </div>
     )
 }
+
+export const getServerSideProps = async (context) => {
+    const cookies = nookies.get(context)
+    // console.log("cookiesddddddddddddddddddddddddd:",cookies);
+    if (cookies.userToken) {
+        return { props: { cookies } };
+      }
+      return {
+        redirect: {
+          destination: '/account/signin',
+          permanent: false,
+        },
+      };
+  };
+  
 
 export default DashBoard
 

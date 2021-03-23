@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { HiArrowNarrowLeft } from "react-icons/hi";
 import MyButton from "../../src/components/Button";
-import Router from "next/router"
 import AccountBase from "../../src/components/AccountBase/index"
+import {} from "../../src/utils/auth/helper"
+import router, {useRouter} from "next/router";
+import { signIn } from "../../src/utils/auth/helper"
+import {setCookie, parseCookies} from 'nookies'
+import Toast from "../../src/components/Toast";
 
 
 const validationYupSchema = Yup.object({
@@ -18,14 +21,48 @@ const validationYupSchema = Yup.object({
 
 
 const SignIn: React.FC = (): React.ReactElement => {
+  const router = useRouter()
+  const [values,setValues] = useState({
+    error: false,
+    loading: false,
+    success:false,
+    errorValue: "Please Check Your Email and Password"
+  })
+
+  useEffect(()=>{
+    if(values.success){
+      
+    }
+  },[values.success,values.error])
+
+
+
   return (
       <AccountBase  signType={"Sign In"} > 
+        {
+          values.error ? <Toast value={"Login Failed! Check your Email and Password"} type="error" hideProgressBar={true} /> : ""
+        }
       <Formik
       initialValues={{ email: "", password: "" }}
       validationSchema={validationYupSchema}
-      onSubmit={() => {
-        console.log("sign in");
-      }}
+      onSubmit=  { async (formData) =>  {
+        setValues({...values, loading:true, success:true, error:false, errorValue:""})
+        await signIn(formData).then(res =>{
+          console.log(res)
+        
+          if(res.status == 200){
+            setValues({...values, loading:false, success:true})
+            router.push("/dashboard")
+          }else{
+            setValues({...values,error:true, loading:false, success:false})
+          }
+         
+        }).catch(error=>{
+          setValues({...values,error:true, loading:false, success:false})
+          console.log("here:",error)
+        })
+      }
+    }
     >
       {(formik) => (
         <form onSubmit={formik.handleSubmit}>
@@ -69,6 +106,7 @@ const SignIn: React.FC = (): React.ReactElement => {
       </AccountBase>
   );
 };
+
 
 
 export default SignIn;

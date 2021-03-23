@@ -25,9 +25,6 @@ const skeleton = <div className="flex w-full border dark:border-gray-600 rounded
 </div>
 
 
-
-
-
 const AnalysisMainLayout = () => {
   const [data, setData] = useState(null);
   const [showAnlaysis, setShowAnalaysis] = useState(true);
