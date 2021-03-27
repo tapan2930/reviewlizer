@@ -26,10 +26,9 @@ export const signIn = async user => {
           }
       })
       .then( res => {
-        // console.log(typeof(res.data.token))
-        destroyCookie(null, 'userToken')
-        setCookie(null, 'userToken', res.data.token)
-        console.log("cookkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkies",parseCookies())
+        setCookie(null, 'userToken', res.data.token, {
+          path:"/"
+        })
         localStorage.setItem("user_id",res.data.user._id)
         res = {...res, status:200}
         return res

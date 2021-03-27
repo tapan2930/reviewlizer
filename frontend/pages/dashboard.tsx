@@ -29,13 +29,14 @@ const DashBoard = (props)=>{
       console.log("inside",props.cookies.userToken)
       const user_id = localStorage.getItem("user_id")
       const usergetHandler = async (user_id,token)=>{
-        let user =  await  getUser(user_id,token)
+      await  getUser(user_id,token).then((user)=>{
         if(user.status !== 200){
           console.log(user.status)
           clearUserCookies()
           router.push("/account/signin")
         }
         setUserInfo(user.data)
+        })
       }
       usergetHandler(token,user_id)
 
@@ -62,9 +63,7 @@ const DashBoard = (props)=>{
 
 export const getServerSideProps = async (context) => {
     const cookies = nookies.get(context)
-    console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",cookies.userToken)
     if (cookies.userToken !== undefined) {
-        console.log("inside",cookies.userToken)
         return { props: { cookies } };
       }
       return {
