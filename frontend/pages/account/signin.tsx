@@ -23,13 +23,6 @@ const validationYupSchema = Yup.object({
 
 
 const SignIn: React.FC = (): React.ReactElement => {
-
-  fetch("https://reviewlizer-backend.herokuapp.com/").then((res)=>{
-    console.log(res)
-  }).catch(err=>{
-    console.log(err)
-  })
-
   const router = useRouter()
   const [values,setValues] = useState({
     error: false,

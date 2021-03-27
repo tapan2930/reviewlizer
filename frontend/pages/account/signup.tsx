@@ -55,7 +55,7 @@ const SignUp:React.FC = ():React.ReactElement => {
                 password:values.password
               }
               console.log(JSON.stringify(data))
-              axios.post("http://localhost:8000/api/signup", JSON.stringify(data), {
+              axios.post(`${process.env.API}/signup`, JSON.stringify(data), {
                 headers:{
                   'Content-Type': 'application/json'
                   }

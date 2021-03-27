@@ -50,7 +50,7 @@ export const signOut = next =>{
 }
  
 export const getUser = (token, id)=>{
-    return axios.get(`http://localhost:8000/api/user/${id}`, {
+    return axios.get(`${process.env.API}/user/${id}`, {
       headers:{
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
