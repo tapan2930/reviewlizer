@@ -1,43 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import Router from "next/router";
 import { AiOutlineSearch } from "react-icons/ai";
+import * as ValidUrl from "valid-url"
 
-import { useSearchValue, useSkeleton } from "../../store/globalStore";
+import { showAnalysis, useOnSeachData, useSearchValue, useSkeleton } from "../../store/globalStore";
   
 type propType = {
     onSearch?: (data) => void,
-    showAnlaysisHandler?: () => void
+    showAnlaysisHandler?: (value) => void
 }
 
-const SearchBar:React.FC<propType> = ({onSearch,showAnlaysisHandler}):React.ReactElement => {
+const SearchBar:React.FC<propType> = ():React.ReactElement => {
   const setSkeletonLoading = useSkeleton(state => state.toggle)
   const searchValue = useSearchValue((state) => state.searchValue);
   const setSearchValue = useSearchValue((state) => state.setSearchValue);
+  const setData = useOnSeachData(state => state.setData)
+  const setShowAnalaysis = showAnalysis(state => state.toggle)
+  const [isUrl,setIsUrl] = useState(true)
+
 
   const onSearchButtonHandler = async () => {
-    
-    if (searchValue) {
-      const route = Router.pathname;
-      if (route === "/dashboard") {
-        Router.push("/dashboard/analysis");
+
+    if(ValidUrl.isUri(searchValue)){
+      setIsUrl(true)
+      if (searchValue) {
+        const route = Router.pathname;
+        if (route === "/dashboard") {
+          Router.push("/dashboard/analysis");
+        }
+  
+  
+        setShowAnalaysis(false)
+        setSkeletonLoading(true)
+  
+        await setTimeout(()=>{
+            console.log("waiting....getting data")
+            let data = TesterFunction(); 
+              setData(data)
+              setShowAnalaysis(true)
+              setSkeletonLoading(false)
+            console.log("got data")  
+          },6000)
       }
-
-      setSkeletonLoading(true)
-
-      console.log(showAnlaysisHandler)
-      await setTimeout(()=>{
-          console.log("waiting....getting data")
-          let data = TesterFunction(); 
-            onSearch(data)
-            setSkeletonLoading(false)
-          console.log("got data")  
-        },1000)
+    }else{
+      setIsUrl(false)
     }
+    
+    
   };
 
   return (
     <>
-      <input
+    <div className="flex">
+    <input
         className="outline-none  py-4 px-4 w-full bg-secondaryPink inline-block "
         type="text"
         value={searchValue}
@@ -53,6 +68,14 @@ const SearchBar:React.FC<propType> = ({onSearch,showAnlaysisHandler}):React.Reac
         </span>
         <span className="hidden sm:inline "> Search </span>{" "}
       </button>
+    </div>
+
+      <div className="text-red-500 h-8">
+      {
+        isUrl ? "":  "* Please Enter Valid Url"
+      }
+      </div>
+     
     </>
   );
 };

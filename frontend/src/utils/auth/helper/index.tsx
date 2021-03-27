@@ -30,7 +30,7 @@ export const signIn = async user => {
         destroyCookie(null, 'userToken')
         setCookie(null, 'userToken', res.data.token)
         console.log("cookkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkies",parseCookies())
-        localStorage.setItem("user_id",res.data.user)
+        localStorage.setItem("user_id",res.data.user._id)
         res = {...res, status:200}
         return res
       })
@@ -50,10 +50,6 @@ export const signOut = next =>{
 }
  
 export const getUser = (token, id)=>{
-    if( typeof window == "undefined") {
-       return false
-    }
-
     return axios.get(`http://localhost:8000/api/user/${id}`, {
       headers:{
         'Content-Type': 'application/json',
@@ -62,10 +58,12 @@ export const getUser = (token, id)=>{
     })
     .then( res => {
       console.log(res.data)
+      return res
     })
     .catch( err =>{
 
       console.log(err.response)
+      return err.response
     })
     
 }

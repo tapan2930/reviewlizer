@@ -3,6 +3,9 @@ import {FaBars} from "react-icons/fa";
 import { BiMoon, BiSun} from "react-icons/bi";
 import { RiLogoutBoxRLine } from "react-icons/ri"
 import  {useDarkMode, useNavbarToggle} from "../../store/globalStore"
+// import clearUserCookies from '../../utils/clearCookies';
+import {useRouter} from "next/router"
+import { destroyCookie } from 'nookies';
 
 
 
@@ -10,10 +13,16 @@ const TopNavbar = ()=>{
     const isDarkMode = useDarkMode(state => state.theme);
     const toggleDarkMode = useDarkMode(state => state.toggle);
     const toggleNavbar = useNavbarToggle(state => state.toggle);
-    const isNavbar = useNavbarToggle(state => state.navbar)
+    const router = useRouter()
+
+    const logOut = ()=>{
+        destroyCookie(null, 'userToken')
+        localStorage.removeItem("user_id")
+        router.push("/account/signin")
+    }
 
 
-    console.log(isNavbar)
+    
     return ( 
         <div className="sticky top-0 w-full z-30">
              <div className="h-14 md:h-16 flex items-center bg-white dark:bg-gray-900  dark:text-gray-50 shadow-sm border-b  dark:border-gray-800 transition duration-200 ease-out">
@@ -42,7 +51,7 @@ const TopNavbar = ()=>{
                         <img className="w-10 rounded-full border-gray-800 dark:border-gray-50 border-2" src="/assets/images/profile.jpg" alt="profile"/>
                     </div> 
                 </div>
-                <div className="ml-3 flex justify-center items-center bg-gray-800  text-gray-50   cursor-pointer h-14 md:h-16 w-14 md:w-16"> {/* Profile Toggler container */}
+                <div onClick={()=>logOut()} className="ml-3 flex justify-center items-center bg-gray-800  text-gray-50   cursor-pointer h-14 md:h-16 w-14 md:w-16"> {/* Profile Toggler container */}
                         <span> <RiLogoutBoxRLine /></span>
                     </div>
                 

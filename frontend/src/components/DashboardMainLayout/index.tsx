@@ -80,7 +80,7 @@ const DashboardMainLayout = () => {
     return (
         <div className="h-full">
             <div className="flex container items-center justify-center my-16">
-                <div className="w-full flex">
+                <div className="w-full flex flex-col">
                    <SearchBar onSearch = {null} />
                 </div>
             </div>

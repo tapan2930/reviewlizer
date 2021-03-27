@@ -6,8 +6,9 @@ import AccountBase from "../../src/components/AccountBase/index"
 import {} from "../../src/utils/auth/helper"
 import router, {useRouter} from "next/router";
 import { signIn } from "../../src/utils/auth/helper"
-import {setCookie, parseCookies} from 'nookies'
 import Toast from "../../src/components/Toast";
+import {CgSpinner} from "react-icons/cg"
+
 
 
 const validationYupSchema = Yup.object({
@@ -50,7 +51,7 @@ const SignIn: React.FC = (): React.ReactElement => {
         await signIn(formData).then(res =>{
           console.log(res)
         
-          if(res.status == 200){
+          if(res.status === 200){
             setValues({...values, loading:false, success:true})
             router.push("/dashboard")
           }else{
@@ -96,10 +97,19 @@ const SignIn: React.FC = (): React.ReactElement => {
            ) : null}
           </div>
 
-          <MyButton type="outline" display="block" style="border w-full mb-6">
-            {" "}
-            Sign In{" "}
-          </MyButton>
+          <MyButton
+                type="outline"
+                display="block"
+                style="border w-full mb-6"
+              >
+                <div className=" w-full h-6 flex justify-center items-center">
+                  {
+                    values.loading ? <span className="animate-spin text-lg mr-1 "><CgSpinner /></span> : ""
+                  }
+                 Sign In
+                </div>
+                
+              </MyButton>
         </form>
       )}
     </Formik>

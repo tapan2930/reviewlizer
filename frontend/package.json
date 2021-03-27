@@ -25,6 +25,7 @@
     "react-icons": "^4.1.0",
     "react-toastify": "^7.0.3",
     "tailwindcss": "^2.0.2",
+    "valid-url": "^1.0.9",
     "yup": "^0.32.9",
     "zustand": "^3.3.1"
   },

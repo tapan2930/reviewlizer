@@ -45,8 +45,30 @@ export type useSkeletonType =  {
 }
 
 export const useSkeleton = create<useSkeletonType>(set  => ({
-    // theme : localStorage.getItem("userTheme") || "light",
     loading: false,
     toggle: (value) => set(state => ({ loading: value}))
 }) )
 
+
+export type useOnSeachDataType = {
+    data:any,
+    setData: (data:any) => void,
+    resetData: () => void
+}
+
+export const useOnSeachData = create<useOnSeachDataType>(set =>({
+    data:null,
+    setData: (data)=> set(state => ({data})) ,
+    resetData:  ()=> set(state => ({data: null}))
+}))
+
+
+export type showAnalysisType =  {
+    show:boolean,
+    toggle: (value:boolean) => void
+}
+
+export const showAnalysis = create<showAnalysisType>(set  => ({
+    show: false,
+    toggle: (value) => set(state => ({ show: value}))
+}) )

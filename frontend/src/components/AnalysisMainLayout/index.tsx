@@ -4,10 +4,42 @@ import SearchBar from "../SearchBar";
 import HighlightContainer from "./HighlightContainer";
 import ProductDetails from "./ProductDetails";
 import SentimentAnalysisContainer from "./SentimentAnalysis";
-import  {useSkeleton} from "../../store/globalStore"
+import  {useSkeleton, useOnSeachData, showAnalysis} from "../../store/globalStore"
 
 
-const skeleton = <div className="flex w-full border dark:border-gray-600 rounded-md p-6 ">
+
+
+const AnalysisMainLayout = () => {
+  const data = useOnSeachData(state => state.data)
+  const isLoading = useSkeleton(state => state.loading)
+  const showAnlaysis = showAnalysis(state => state.show)
+
+  return (
+    <div className="container">
+      <div className="flex items-center justify-center my-16">
+        <div className="w-full flex flex-col">
+          <SearchBar />
+        </div>
+      </div>
+
+      {/* Display after press search */}
+      <main>
+        {
+          isLoading && skeleton
+        }
+        {
+          console.log(showAnlaysis)
+        }
+      {
+        showAnlaysis && dataLayout(data)
+      }
+      </main>
+    </div>
+  );
+};
+
+
+const skeleton = <div className="animate-pulse flex w-full border dark:border-gray-600 rounded-md p-6 ">
   <div className="w-full flex flex-col justify-center ">
     <div className="w-24 h-24 md:h-48 md:w-48 rounded-full bg-gray-300 dark:bg-gray-400 mx-auto mb-6"></div>
     <div className="flex flex-row justify-around">
@@ -25,67 +57,41 @@ const skeleton = <div className="flex w-full border dark:border-gray-600 rounded
 </div>
 
 
-const AnalysisMainLayout = () => {
-  const [data, setData] = useState(null);
-  const [showAnlaysis, setShowAnalaysis] = useState(true);
-  const isLoading = useSkeleton(state => state.loading)
-
-  let onSearchHandler = async (dataSearch) => {
-    await setData(dataSearch);
-  };
-
-  let showAnlaysisHandler = () =>{
-    setShowAnalaysis(true)
+const dataLayout = (data)=>(
+  <>
+  {
+    console.log("inside the function.", data)
   }
-
-  return (
-    <div className="container">
-      <div className="flex items-center justify-center my-16">
-        <div className="w-full flex">
-          <SearchBar onSearch={onSearchHandler} showAnlaysisHandler = {showAnlaysisHandler} />
-        </div>
-      </div>
-
-      {/* Display after press search */}
-      <main  className={`${ showAnlaysis ? "block" : "hidden"}`}>
-        <section className=" my-24">
-          {/* Product Details component */}
-          <h1 className="text-lg font-bold border-primaryPink border-b-2 inline-block mb-2">
-                Product Details:
-              </h1>
-          {(data && !isLoading) ? (
-            <div >
-              <ProductDetails {...data.productDetails} />
-            </div>
-          ) :  <div className="animate-pulse">{skeleton}</div>}
-        </section>
-
-
-        <section className="my-24">
-          {/* Sentiment Analysis */}
-          <h1 className="text-lg font-bold border-primaryPink border-b-2 inline-block mb-2">
-                Sentiment Details:
-              </h1>
-          {(data && !isLoading) ?  (
-            <div >
-              <SentimentAnalysisContainer sentimentDetails = {data.sentimentDetails} />
-            </div>
-          ) : <div className="animate-pulse">{skeleton}</div> }
-        </section>
-     
-        <section className="my-24"> {/* Highlight Section */}
-            {(data && !isLoading) ? (
-              <div>
-                <h1 className="text-lg font-bold border-primaryPink border-b-2 inline-block">
-                Factual Details:
-              </h1>
-                <HighlightContainer highlightDetails = {data.highlightDetails} />
-              </div>
-            ) : <div className="animate-pulse">{skeleton}</div> }
-        </section>
-      </main>
+  <section className=" my-24">
+  {/* Product Details component */}
+  <h1 className="text-lg font-bold border-primaryPink border-b-2 inline-block mb-2">
+        Product Details:
+      </h1>
+    <div >
+      <ProductDetails {...data.productDetails} />
     </div>
-  );
-};
+</section>
+
+
+<section className="my-24">
+  {/* Sentiment Analysis */}
+  <h1 className="text-lg font-bold border-primaryPink border-b-2 inline-block mb-2">
+        Sentiment Details:
+      </h1>
+    <div >
+      <SentimentAnalysisContainer sentimentDetails = {data.sentimentDetails} />
+    </div>
+</section>
+
+<section className="my-24"> {/* Highlight Section */}
+      <div>
+        <h1 className="text-lg font-bold border-primaryPink border-b-2 inline-block">
+        Factual Details:
+      </h1>
+        <HighlightContainer highlightDetails = {data.highlightDetails} />
+      </div>
+</section>
+</>
+)
 
 export default AnalysisMainLayout;
