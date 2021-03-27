@@ -2,7 +2,7 @@ import axios from "axios"
 import {setCookie, parseCookies, destroyCookie} from 'nookies'
 
 export const signUp = user =>{
-    axios.post("http://localhost:8000/api/signup", JSON.stringify(user), {
+    axios.post(`${process.env.API}/signup`, JSON.stringify(user), {
         headers:{
           'Content-Type': 'application/json'
           }
@@ -20,7 +20,7 @@ export const signUp = user =>{
 
 
 export const signIn = async user => {
-    return axios.post("http://localhost:8000/api/signin", JSON.stringify(user), {
+    return axios.post(`${process.env.API}/signin`, JSON.stringify(user), {
         headers:{
           'Content-Type': 'application/json'
           }

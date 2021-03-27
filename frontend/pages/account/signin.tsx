@@ -8,6 +8,7 @@ import router, {useRouter} from "next/router";
 import { signIn } from "../../src/utils/auth/helper"
 import Toast from "../../src/components/Toast";
 import {CgSpinner} from "react-icons/cg"
+import axios from "axios";
 
 
 
@@ -22,6 +23,13 @@ const validationYupSchema = Yup.object({
 
 
 const SignIn: React.FC = (): React.ReactElement => {
+
+  fetch("https://reviewlizer-backend.herokuapp.com/").then((res)=>{
+    console.log(res)
+  }).catch(err=>{
+    console.log(err)
+  })
+
   const router = useRouter()
   const [values,setValues] = useState({
     error: false,
