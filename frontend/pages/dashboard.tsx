@@ -32,8 +32,8 @@ const DashBoard = (props)=>{
         let user =  await  getUser(user_id,token)
         if(user.status !== 200){
           console.log(user.status)
-          // clearUserCookies()
-          // router.push("/account/signin")
+          clearUserCookies()
+          router.push("/account/signin")
         }
         setUserInfo(user.data)
       }
