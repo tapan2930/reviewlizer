@@ -7,7 +7,7 @@ import SideNavbar from "../../components/SideNavbar"
 import TopNavbar from "../../components/TopNavbar"
 
 
-const DashBOardBase = (props)=>{
+const DashBoardBase = (props)=>{
     const isDarkMode = useDarkMode(state => state.theme);
     const isNavbar = useNavbarToggle(state => state.navbar)
     const toggleNavbar = useNavbarToggle(state => state.toggle);
@@ -33,4 +33,4 @@ const DashBOardBase = (props)=>{
 }
 
 
-export default DashBOardBase
+export default DashBoardBase

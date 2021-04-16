@@ -1,9 +1,15 @@
 import SavedTable from "./Table"
+import {productDetailsType} from "../../types/userInfo.types"
 
-const SavedPageMainLayout :React.FC = ():React.ReactElement => {
+type propType = {
+    savedProducts: Array<productDetailsType>
+}
+
+const SavedPageMainLayout :React.FC<propType> = ({savedProducts}):React.ReactElement => {
+
     return (
         <div>
-            <SavedTable data={null} />
+            <SavedTable savedProducts={savedProducts} />
         </div>
     )
 }

@@ -6,18 +6,13 @@ import {useRouter} from 'next/router';
 // hepler hooker and function and globar store
 import { getUser } from '../../src/utils/auth/helper';
 import clearUserCookies from '../../src/utils/clearCookies';
-import  {useDarkMode, useNavbarToggle} from "../../src/store/globalStore";
 
 // components
 import AnalysisMainLayout from "../../src/components/AnalysisMainLayout";
-import SideNavbar from "../../src/components/SideNavbar"
-import TopNavbar from "../../src/components/TopNavbar"
+import DashBoardBase from "../../src/components/DashBoardBase";
 
 
 const Analaysis = (props)=>{
-    const isDarkMode = useDarkMode(state => state.theme);
-    const isNavbar = useNavbarToggle(state => state.navbar)
-    const toggleNavbar = useNavbarToggle(state => state.toggle);
     const [userInfo,setUserInfo] = useState(null)
     const router = useRouter()
 
@@ -37,22 +32,9 @@ const Analaysis = (props)=>{
       }, [])
 
     return (
-        <div className={` ${isDarkMode ? "dark": " "} `}>
-            <div className="font-body bg-gray-50  text-gray-700 dark:text-gray-50 dark:bg-gray-900 transition duration-200 ease-out">
-            <TopNavbar />
-           
-            <div className="flex">
-            {
-            <SideNavbar />
-            
-            }
-            <div onClick={()=> toggleNavbar()} className={` ${isNavbar ? "hidden" : " fixed"} md:hidden bg-gray-900 dark:bg-gray-700  opacity-60 inset-0 z-20 h-screen `}>
-            </div>
-           <div className="container mx-auto"><AnalysisMainLayout /></div>
-            </div>
-            </div>
-          
-        </div>
+      <DashBoardBase>
+          <AnalysisMainLayout />
+      </DashBoardBase>
     )
 }
 

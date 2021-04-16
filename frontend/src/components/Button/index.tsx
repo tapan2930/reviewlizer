@@ -17,8 +17,8 @@ type propType = {
 const MyButton :React.FC<propType> = ({type="primary",display="inline-block",style="", onclick  , children}):React.ReactElement => {
     let typeStyle = (type) =>{
         switch(type){
-            case "primary" : return " border-2 bg-primaryPink text-gray-50 hover:text-primaryPink hover:bg-secondaryPink hover:shadow-md transistion duration-150 ease-linear ";
-            case "outline" : return " border-2 text-primaryPink hover:text-gray-100 hover:bg-primaryPink hover:shadow-md transistion duration-150 ease-linear"
+            case "primary" : return " border-2 bg-primaryPink text-gray-50 hover:bg-tertiaryPink hover:shadow-md hover:border-tertiaryPink transistion duration-100 ease-linear ";
+            case "outline" : return " border-2 text-primaryPink hover:text-gray-100 hover:bg-tertiaryPink hover:border-tertiaryPink hover:shadow-md transistion duration-100 ease-linear"
         }
     }
 

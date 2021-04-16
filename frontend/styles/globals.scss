@@ -57,5 +57,11 @@
   backdrop-filter: blur(1px);
 } 
 
+.bar-of-progress {
+  z-index: 500;
+  position: absolute;
+  top: 0;
+}
+
 
 

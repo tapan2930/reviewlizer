@@ -11,6 +11,7 @@ const HomePage = ()=>{
               <h1 className="uppercase ml-2 font-semibold">Reviewlizer</h1>
           </div>
           <div className="flex">
+            <div className="mr-2"><MyButton onclick={()=>{Router.push("/dashboard")}} type="outline" display="inline-block">Dashboard</MyButton></div>
             <div className=""><MyButton onclick={()=>{Router.push("/account/signin")}} type="primary" display="inline-block">Log In</MyButton></div>
           </div>
         </div>

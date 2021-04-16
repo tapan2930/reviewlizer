@@ -19,6 +19,7 @@ module.exports = {
       colors: {
         'primaryPink': "#F31868",
         'secondaryPink': "rgba(242,24,104,0.1)",
+        'tertiaryPink': "#A61046",
         'gray-900': "#131414",
         'd-bg-container':"#212424",
         'd-secondary':'#1a1f1f'
@@ -34,7 +35,7 @@ module.exports = {
   variants: {
     extend: {
       backgroundColor: ['odd'],
-      borderColor:['odd']
+      borderColor:['odd', "hover"]
     },
   },
   plugins: [],

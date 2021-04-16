@@ -1,5 +1,5 @@
 import React from 'react'
-import DashBOardBase from '../../src/components/DashBoardBase'
+import DashBoardBase from '../../src/components/DashBoardBase'
 import SavedPageMainLayout from '../../src/components/SavedPageMainLayout'
 import nookies from "nookies"
 import { useEffect, useState } from 'react';
@@ -30,11 +30,14 @@ const SavedPage :React.FC = (props:any):React.ReactElement => {
       }, [])
 
     return (
-        <DashBOardBase>
-            <SavedPageMainLayout />
-        </DashBOardBase>
+        <DashBoardBase>
+          {
+            userInfo ? <SavedPageMainLayout savedProducts={userInfo.savedProducts} /> : null
+          }
+        </DashBoardBase>
     )
 }
+
 
 export const getServerSideProps = async (context) => {
     const cookies = nookies.get(context)
