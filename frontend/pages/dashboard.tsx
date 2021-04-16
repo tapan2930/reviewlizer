@@ -26,7 +26,6 @@ const DashBoard = (props)=>{
 
     useEffect(()=>{
       const token = props.cookies.userToken
-      console.log("inside",props.cookies.userToken)
       const user_id = localStorage.getItem("user_id")
       const usergetHandler = async (user_id,token)=>{
       await  getUser(user_id,token).then((user)=>{
@@ -39,7 +38,6 @@ const DashBoard = (props)=>{
         })
       }
       usergetHandler(token,user_id)
-
     }, [])
     return (
         <div className={` ${isDarkMode ? "dark": " "} `}>
@@ -53,7 +51,7 @@ const DashBoard = (props)=>{
             }
              <div onClick={()=> toggleNavbar()} className={` ${isNavbar ? "hidden" : " fixed"} frost  md:hidden  inset-0 z-20 h-screen `}>
             </div>
-            <div className=" container mx-auto"><DashboardMainLayout /></div>
+            <div className=" container mx-auto"><DashboardMainLayout userInfo = {userInfo} /></div>
             </div>
             </div>
           

@@ -1,8 +1,10 @@
 import axios from "axios"
 import {setCookie, parseCookies, destroyCookie} from 'nookies'
 
+const API = process.env.NODE_ENV === "production" ? process.env.API : process.env.LOCALAPI
+
 export const signUp = user =>{
-    axios.post(`${process.env.API}/signup`, JSON.stringify(user), {
+    axios.post(`${API}/signup`, JSON.stringify(user), {
         headers:{
           'Content-Type': 'application/json'
           }
@@ -20,7 +22,7 @@ export const signUp = user =>{
 
 
 export const signIn = async user => {
-    return axios.post(`${process.env.API}/signin`, JSON.stringify(user), {
+    return axios.post(`${API}/signin`, JSON.stringify(user), {
         headers:{
           'Content-Type': 'application/json'
           }
@@ -49,7 +51,7 @@ export const signOut = next =>{
 }
  
 export const getUser = (token, id)=>{
-    return axios.get(`${process.env.API}/user/${id}`, {
+    return axios.get(`${API}/user/${id}`, {
       headers:{
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`

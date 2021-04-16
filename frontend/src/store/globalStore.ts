@@ -1,11 +1,12 @@
 import create from "zustand"
 
 
+
+// ******************Dark Mode****************** //
 export type useDarkModeType =  {
     theme:boolean,
     toggle: () => void
 }
-
 
 export const useDarkMode = create<useDarkModeType>(set  => ({
     // theme : localStorage.getItem("userTheme") || "light",
@@ -14,6 +15,7 @@ export const useDarkMode = create<useDarkModeType>(set  => ({
 }) )
 
 
+// *******************Navbar Toggle***************** //
 export type useNavbarToggleType =  {
     navbar:boolean,
     toggle: () => void
@@ -26,6 +28,8 @@ export const useNavbarToggle = create<useNavbarToggleType>( (set) =>({
     }))
 }))
 
+
+//  *****************Search Values******************* //
 export type useSearchValueType =  {
     searchValue:string,
     setSearchValue: (value) => void
@@ -39,6 +43,7 @@ export const useSearchValue = create<useSearchValueType>( (set) =>({
 }))
 
 
+//  *******************Skeleton******************** //
 export type useSkeletonType =  {
     loading:boolean,
     toggle: (value:boolean) => void
@@ -50,6 +55,7 @@ export const useSkeleton = create<useSkeletonType>(set  => ({
 }) )
 
 
+// ********************Data************************** //
 export type useOnSeachDataType = {
     data:any,
     setData: (data:any) => void,
@@ -62,7 +68,7 @@ export const useOnSeachData = create<useOnSeachDataType>(set =>({
     resetData:  ()=> set(state => ({data: null}))
 }))
 
-
+// ********************Show Analysis**************** //
 export type showAnalysisType =  {
     show:boolean,
     toggle: (value:boolean) => void
@@ -72,3 +78,4 @@ export const showAnalysis = create<showAnalysisType>(set  => ({
     show: false,
     toggle: (value) => set(state => ({ show: value}))
 }) )
+

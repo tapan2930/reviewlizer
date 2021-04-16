@@ -46,16 +46,15 @@ const SideNavbar = ()=>{
                 {
                     // Mapping each Navigation (icon,name,link) on sidebar
                     navLinks.map((navLink, idx:number)=>{
-                        return (
+                        return navLink.status ? (
                             <div id={`${idx}navLink.name`} > 
                                 <NavButton name={navLink.name} link={navLink.link}>
                                     <navLink.icon />
                                 </NavButton>
                             </div>
-                        )
+                        ) : null
                     })
                 }
-        
             </div>
            
            

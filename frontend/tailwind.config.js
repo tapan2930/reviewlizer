@@ -23,6 +23,9 @@ module.exports = {
         'd-bg-container':"#212424",
         'd-secondary':'#1a1f1f'
       },
+      minWidth: {
+        "table-min-width":"640px"
+      },
       transitionProperty: {
         'width': 'width'
        }
@@ -31,6 +34,7 @@ module.exports = {
   variants: {
     extend: {
       backgroundColor: ['odd'],
+      borderColor:['odd']
     },
   },
   plugins: [],
