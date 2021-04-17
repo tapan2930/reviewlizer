@@ -22,20 +22,25 @@ module.exports = {
         'tertiaryPink': "#A61046",
         'gray-900': "#131414",
         'd-bg-container':"#212424",
-        'd-secondary':'#1a1f1f'
+        'd-secondary':'#1a1f1f',
+        'card': "6B6B6B"
       },
       minWidth: {
         "table-min-width":"640px"
       },
       transitionProperty: {
         'width': 'width'
+       },
+       height:{
+         "hero": "85vh"
        }
     },
   },
   variants: {
     extend: {
       backgroundColor: ['odd'],
-      borderColor:['odd', "hover"]
+      borderColor:['odd', "hover"],
+      margin:['odd', 'even']
     },
   },
   plugins: [],

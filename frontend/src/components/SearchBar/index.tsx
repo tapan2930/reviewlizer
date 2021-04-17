@@ -28,7 +28,8 @@ const SearchBar:React.FC<propType> = ():React.ReactElement => {
         if (route === "/dashboard") {
           Router.push("/dashboard/analysis");
         }
-  
+        
+
   
         setShowAnalaysis(false)
         setSkeletonLoading(true)
@@ -37,6 +38,7 @@ const SearchBar:React.FC<propType> = ():React.ReactElement => {
             console.log("waiting....getting data")
             let data = TesterFunction(); 
               setData(data)
+              
               setShowAnalaysis(true)
               setSkeletonLoading(false)
             console.log("got data")  

@@ -63,5 +63,24 @@
   top: 0;
 }
 
+.card{
+  background: #F8F8F8;
+  box-shadow: 4px 4px 16px rgba(231, 231, 231, 0.25), -4px -4px 16px rgba(0, 0, 0, 0.16);
+  border-radius: 14px;
+}
+
+.hUnderline{
+  position: relative;
+  &:after{
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 4px;
+    background-color: #F31868;
+    border-radius: 12px;
+    left: 0px;
+    bottom: -8px;
+  }
+}
 
 

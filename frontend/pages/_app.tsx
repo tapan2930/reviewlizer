@@ -2,7 +2,7 @@ import '../styles/globals.scss'
 import '../styles/tailwind.css'
 
 import ProgressBar from "@badrap/bar-of-progress"
-import {useRouter, Router} from "next/router"
+import {Router} from "next/router"
 
 
 const progress = new ProgressBar({
@@ -25,7 +25,11 @@ function MyApp({ Component, pageProps }) {
       behavior: "smooth",
     })
   })
-  return <Component {...pageProps} />
+  return <>
+  <div className="bg-gray-50 dark:bg-gray-900 h-screen">
+    <Component {...pageProps} />
+  </div>
+  </>
      
 }
 
