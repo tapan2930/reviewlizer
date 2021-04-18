@@ -5,6 +5,7 @@ import ProgressBar from "@badrap/bar-of-progress"
 import {Router} from "next/router"
 
 
+
 const progress = new ProgressBar({
   size: 4,
   color: "#131414",
@@ -25,12 +26,8 @@ function MyApp({ Component, pageProps }) {
       behavior: "smooth",
     })
   })
-  return <>
-  <div className="bg-gray-50 dark:bg-gray-900 h-screen">
-    <Component {...pageProps} />
-  </div>
-  </>
-     
+  return <Component {...pageProps} />
+  
 }
 
 export default MyApp

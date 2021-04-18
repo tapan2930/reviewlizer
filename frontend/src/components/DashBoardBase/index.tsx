@@ -14,7 +14,7 @@ const DashBoardBase = (props)=>{
 
     return (
         <div className={` ${isDarkMode ? "dark": " "} `}>
-            <div className="font-body bg-gray-50  text-gray-700 dark:text-gray-50 dark:bg-gray-900 transition duration-200 ease-out">
+            <div className="font-body bg-gray-50  min-h-screen  text-gray-700 dark:text-gray-50 dark:bg-gray-900 transition duration-200 ease-out">
             <TopNavbar />
            
             <div className="flex">

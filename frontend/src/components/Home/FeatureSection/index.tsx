@@ -46,7 +46,7 @@ const featureSection = {
 
 const HomeFeatureSection :React.FC = ():React.ReactElement => {
     return (
-        <div className="bg-white py-12">
+        <div className="bg-white py-12 relative">
               {/* section 1  Title and Sub title*/}
             <div>
                 <h1 className="text-center text-xl font-semibold text-gray-700 sm:text-2xl md:text-3xl md:mb-6 md:mt-10">{featureSection.title}</h1>
@@ -63,6 +63,7 @@ const HomeFeatureSection :React.FC = ():React.ReactElement => {
                   })  
                 }
             </div>
+
         </div>
     )
 }
