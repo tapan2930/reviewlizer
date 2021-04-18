@@ -22,7 +22,7 @@ const HomeHeroSection :React.FC = ():React.ReactElement => {
             </div>
 
             {/* Section 3 Hero Img */}
-            <div className="hidden sm:block h-hero bg-red-100 overflow-y-auto border rounded-lg shadow-2xl">
+            <div className="hidden sm:block h-hero bg-red-100 overflow-y-auto border rounded-lg shadow-2xl hero-scroll">
                 <img src="/assets/images/hero.png" alt="hero img" />
             </div>
         </div>

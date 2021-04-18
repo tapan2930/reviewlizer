@@ -27,7 +27,6 @@
 }
 
 
-
 .smallSCroll {
   scrollbar-width: thin;
   scrollbar-color: rgba(242,24,104,0.1) #f8f8f8;
@@ -46,6 +45,25 @@
 .smallSCroll::-webkit-scrollbar-thumb {
   background-color: rgb(54, 53, 53);
   border-radius: 5px;
+}
+
+.hero-scroll{
+  scrollbar-width: thin;
+  scrollbar-color: rgba(242,24,104,0.1) #f8f8f8;
+
+  &:-webkit-scrollbar {
+    width: 3px;
+    height: 1px; 
+  }
+
+  &:-webkit-scrollbar-track {
+    background: rgba(242, 24, 104, 0.281);
+  }
+
+  &:-webkit-scrollbar-thumb{
+    background-color: rgb(54, 53, 53);
+    border-radius: 5px;
+  }
 }
 
 *:focus {

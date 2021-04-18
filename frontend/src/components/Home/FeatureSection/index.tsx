@@ -49,7 +49,7 @@ const HomeFeatureSection :React.FC = ():React.ReactElement => {
         <div className="bg-white py-12">
               {/* section 1  Title and Sub title*/}
             <div>
-                <h1 className="text-center text-xl font-semibold text-gray-700 sm:text-2xl md:text-3xl md:mb-6 md:mt-20">{featureSection.title}</h1>
+                <h1 className="text-center text-xl font-semibold text-gray-700 sm:text-2xl md:text-3xl md:mb-6 md:mt-10">{featureSection.title}</h1>
                 <h2 className="text-center text-base font-normal text-gray-500 mt-2 md:text-xl">{featureSection.subTitle}</h2>
             </div>
 
@@ -69,11 +69,11 @@ const HomeFeatureSection :React.FC = ():React.ReactElement => {
 
 const FeatureCard = ({featureCardDetail}) => {
     return (
-        <div className="card flex h-40 p-6 md:max-w-sm md:odd:ml-auto">
-            <div className="text-4xl text-primaryPink">{featureCardDetail.icon}</div>
+        <div className="card flex h-40 p-6 md:max-w-sm md:odd:ml-auto ">
+            <div className="text-4xl  text-primaryPink">{featureCardDetail.icon}</div>
             <div className="ml-4">
-                <h1 className="hUnderline text-lg font-medium mb-6">{featureCardDetail.title}</h1>
-                <div>{featureCardDetail.text}</div>
+                <h1 className="hUnderline text-base md:text-lg font-medium mb-6 text-gray-700">{featureCardDetail.title}</h1>
+                <div className="text-gray-500 text-sm md:text-base">{featureCardDetail.text}</div>
             </div>
         </div>
     )  
