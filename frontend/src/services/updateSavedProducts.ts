@@ -4,7 +4,7 @@ import {generate} from "shortid"
 const API = process.env.NODE_ENV === "production" ? process.env.API : process.env.LOCALAPI
 
 
-export const addToSavedProduct = (userId, newProduct, token)=>{
+export const addToSavedProduct = (token,userId, newProduct)=>{
     let productData = {...newProduct,id:generate()}
     console.log("Product to be added:", productData)
     return axios.post(`${API}/updateSaved/add/${userId}/`, JSON.stringify(productData), {
@@ -14,12 +14,20 @@ export const addToSavedProduct = (userId, newProduct, token)=>{
           }
       }).then(res=>{
           console.log(res)
+          return {
+            status: 200,
+            data: res.data
+          }
       }).catch(err =>{
           console.log(err.response)
+          return {
+            status: 400,
+            data: err.response
+          }
       })
 }
 
-export const deleteFromSavedProduct = (userId, productId, token)=>{
+export const deleteFromSavedProduct = (token, userId, productId)=>{
     let data = {
         productId
     }
@@ -31,8 +39,16 @@ export const deleteFromSavedProduct = (userId, productId, token)=>{
           }
       }).then(res=>{
           console.log(res)
+          return {
+            status: 200,
+            data: res.data
+          }
       }).catch(err =>{
           console.log(err.response)
+          return {
+            status: 400,
+            data: err.response
+          }
       })
 }
 

@@ -33,7 +33,12 @@ const SavedTable :React.FC<propType> = ({savedProducts}):React.ReactElement => {
                                 <td className="border-l border-pink-200 dark:border-gray-700 p-2 px-6">{id+1}</td>
                                 <td className="border-l border-pink-200 dark:border-gray-700 p-2 px-6">{row.name}</td>
                                 <td className="border-l border-pink-200 dark:border-gray-700 p-2 px-6"><a href={row.link} className="border-dotted border-b border-primaryPink text-sm">{row.source}</a></td>
-                                <td className="cursor-pointer border-l border-pink-200 dark:border-gray-700 p-2 px-6 text-xl hover:bg-gray-800 hover:text-gray-50 transition-all duration-200" data-for='remove' data-tip="Remove"><MdDelete/></td>
+                                <td 
+                                className="cursor-pointer border-l border-pink-200 dark:border-gray-700 p-2 px-6 text-xl hover:bg-gray-800 hover:text-gray-50 transition-all duration-200" 
+                                data-for='remove' 
+                                data-tip="Remove"
+                                onClick = {}
+                                ><MdDelete/></td>
                                 <td className="cursor-pointer border-l border-pink-200 dark:border-gray-700 p-2 px-6 text-xl hover:bg-gray-800 hover:text-gray-50 transition-all duration-200" data-for='showAnalysis' data-tip="Show Analysis"><RiSlideshowFill/></td>
                             </tr>   
                         )

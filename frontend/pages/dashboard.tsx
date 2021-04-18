@@ -12,32 +12,18 @@ import clearUserCookies from '../src/utils/clearCookies';
 // components
 import DashboardMainLayout from "../src/components/DashboardMainLayout/index";
 import DashBoardBase from '../src/components/DashBoardBase';
+import useAuthUser from '../src/hooks/useAuthUser';
 
 
 
 const DashBoard = (props)=>{
 
-    const [userInfo,setUserInfo] = useState(null)
-    const router = useRouter()
+    const user = useAuthUser(props.cookies.userToken)
 
-    useEffect(()=>{
-      const token = props.cookies.userToken
-      const user_id = localStorage.getItem("user_id")
-      const usergetHandler = async (user_id,token)=>{
-      await  getUser(user_id,token).then((user)=>{
-        if(user.status !== 200){
-          console.log(user.status)
-          clearUserCookies()
-          router.push("/account/signin")
-        }
-        setUserInfo(user.data)
-        })
-      }
-      usergetHandler(token,user_id)
-    }, [])
+
     return (
       <DashBoardBase>
-          <DashboardMainLayout userInfo = {userInfo} />
+          <DashboardMainLayout userInfo = {user} />
       </DashBoardBase>
         
     )

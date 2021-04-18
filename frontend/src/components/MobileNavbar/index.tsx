@@ -1,8 +1,8 @@
 import React from 'react';
 import {BiHomeAlt, BiGridAlt, BiStar} from "react-icons/bi";
-import {BsSquareHalf} from "react-icons/bs";
+import {BsSquareHalf} from "react-icons/bs";   
 import NavButton from "../NavButtons"
-import  {useNavbarToggle} from "../../store/globalStore"
+
 
 
 // List of navigation links and icons
@@ -34,21 +34,17 @@ const navLinks = [
 
 ]
 
-
-
-const SideNavbar = ()=>{
-    const isNavbar = useNavbarToggle(state => state.navbar)
-
+const MobileNavbar :React.FC = ():React.ReactElement => {
     return (
-        <div className={`  ${isNavbar ? " -left-16 " : " left-0 w-16 "} fixed h-full transition-all duration-200 ease-out z-30 bg-white dark:border-gray-800 border-r  dark:bg-gray-900 dark:text-gray-50`}>
+        <div className={`py-2 bg-white transition-all duration-200 ease-out z-50  dark:border-gray-800 border-r  dark:bg-gray-900 dark:text-gray-50`}>
             
-            <div className="flex flex-col ">
+            <div className="flex justify-evenly items-center ">
                 {
                     // Mapping each Navigation (icon,name,link) on sidebar
                     navLinks.map((navLink, idx:number)=>{
                         return navLink.status ? (
-                            <div id={`${idx}navLink.name`} > 
-                                <NavButton name={navLink.name} link={navLink.link}>
+                            <div id={`${idx}navLink.name`}> 
+                                <NavButton name={navLink.name} link={navLink.link} align="horizontal">
                                     <navLink.icon />
                                 </NavButton>
                             </div>
@@ -62,4 +58,4 @@ const SideNavbar = ()=>{
     )
 }
 
-export default SideNavbar
+export default MobileNavbar

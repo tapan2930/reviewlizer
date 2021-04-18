@@ -1,4 +1,8 @@
 import create from "zustand"
+import { addToProductHistory } from "../services/updateProductHistory"
+import { addToSavedProduct, deleteFromSavedProduct } from "../services/updateSavedProducts"
+import {prevouslySearchedProductType, productDetailsType, userInfoType} from "../types/userInfo.types"
+import { getUser } from "../utils/auth/helper"
 
 
 
@@ -79,3 +83,44 @@ export const showAnalysis = create<showAnalysisType>(set  => ({
     toggle: (value) => set(state => ({ show: value}))
 }) )
 
+
+// ****************** User Info ****************** //
+export type userInfoTypeStore = {
+    userData: userInfoType | null,
+    setUser: (userData) => void
+    authUser: (token, userId) => Promise<any>
+    addSaved: (token,userId, newProduct) => Promise<Array<productDetailsType>>,
+    deleteSaved: (token,userId,productId) => Promise<Array<productDetailsType>>,
+    // addHistory: (token,userId,productSearched) => Array<prevouslySearchedProductType>
+}
+
+export const userInfo = create<userInfoTypeStore>((set,get) => ({
+    userData: null,
+    setUser: (userData) =>{
+        console.log("useData", userData)
+        set({userData})
+    },
+    authUser: async (token, userId) => {
+        const user =  await getUser(userId, token)
+        console.log("athuser", user)
+        return user
+    },
+    addSaved: async (token,userId, newProduct) =>{
+        const res = await addToSavedProduct(token,userId, newProduct)
+        set({ userData: await {...res.data}})
+        return res.data.savedProduct
+    },
+    deleteSaved: async (token,userId,productId) => {
+        const res = await deleteFromSavedProduct(token,userId, productId)
+        if(res.status === 200){
+            console.log(get().userData, res.data)
+            set({userData : await {...get().userData as userInfoType}})
+        }
+        return res.data.savedProduct
+    },
+    // addHistory: async (token,userId,productSearched) => {
+    //     const res = await addToProductHistory(token,userId,productSearched)
+    //     set({userData : await {...get().userData as {}, prevouslySearchedProduct: res.data}})
+    //     return res.data.prevouslySearchedProduct
+    // }
+}))

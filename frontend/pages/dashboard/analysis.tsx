@@ -17,6 +17,7 @@ import DashBoardBase from "../../src/components/DashBoardBase";
 const Analaysis = (props)=>{
   const user = useAuthUser(props.cookies.userToken)
   
+  
     return (
       <DashBoardBase>
           <AnalysisMainLayout />
