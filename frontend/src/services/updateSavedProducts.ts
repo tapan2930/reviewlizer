@@ -32,7 +32,7 @@ export const deleteFromSavedProduct = (token, userId, productId)=>{
         productId
     }
     
-    return axios.post(`${API}/updateSaved/delete/${userId}/`, JSON.stringify(data), {
+    return axios.put(`${API}user/updateSaved/delete/${userId}`, JSON.stringify(data), {
         headers:{
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`

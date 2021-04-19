@@ -113,10 +113,10 @@ export const userInfo = create<userInfoTypeStore>((set,get) => ({
         const [token,userId] = getUserTokenNId()
         const res = await deleteFromSavedProduct(token,userId, productId)
         if(res.status === 200){
-            console.log(get().userData, res.data)
-            set({userData : await {...get().userData as userInfoType}})
+            set({userData : await {...res.data}})
+            console.log(get().userData, "zustand", res.data.savedProducts)
         }
-        return res.data.savedProduct
+        return res.data.savedProducts
     },
     // addHistory: async (token,userId,productSearched) => {
     //     const res = await addToProductHistory(token,userId,productSearched)

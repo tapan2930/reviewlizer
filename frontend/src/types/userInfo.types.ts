@@ -1,5 +1,4 @@
 export type productInfoType = {
-    id:string,
     name:string,
     total_rating:string,
     total_reviews:string,
@@ -20,6 +19,7 @@ export type highlightDetailsType = {
 }
 
 export type productDetailsType =  {
+    id:string
     productDetails: productInfoType,
     sentimentDetails: Array<sentimentDetailsType>,
     highlightDetails: Array<highlightDetailsType>

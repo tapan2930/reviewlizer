@@ -2,16 +2,18 @@ import React from 'react'
 import { useState } from 'react'
 import {MdDelete} from "react-icons/md"
 import {RiSlideshowFill} from "react-icons/ri"
-import {productDetailsType} from "../../../types/userInfo.types"
 import  ReactTooltip from "react-tooltip";
 import { userInfo } from '../../../store/globalStore'
 import { useEffect } from 'react'
+import ProgressBar from "@badrap/bar-of-progress"
 
 
-
-type propType = {
-    savedProducts: Array<productDetailsType>
-}
+const deleteLoadingBar = new ProgressBar({
+    size: 4,
+    color: "rgba(110, 231, 183)",
+    className: "bar-of-progress",
+    delay: 100,
+  });
 
 
 const SavedTable :React.FC = ():React.ReactElement => {
@@ -19,23 +21,36 @@ const SavedTable :React.FC = ():React.ReactElement => {
     const deleteSaved = userInfo(state => state.deleteSaved)
     const [productInfoArr, setProductInfoArr] = useState(null)
     
+    const dataArrFun = (savedProducts) =>{
+        return  savedProducts.map(data=>{
+            let id = data.id
+            return {...data.productDetails, id}
+        })
+    }
+    
     // update state when SavedProduct Values change
     useEffect(()=>{
-        let dataArr = savedProducts.map(data=>{
-            return data.productDetails
-        })
+        let dataArr = dataArrFun(savedProducts)
         setProductInfoArr(dataArr)
-    }, [savedProducts])
+    }, [])
 
-    const onDeleteHandler = (productId) =>{
-        deleteSaved(productId)
+    const onDeleteHandler = async (productId) =>{
+        deleteLoadingBar.start()
+        await deleteSaved(productId).then(res=>{
+            console.log(savedProducts, res,"table")
+            let updatedData = dataArrFun(res)
+            console.log()
+            setProductInfoArr(updatedData)
+            deleteLoadingBar.finish()
+        })
+
     }
     return (
         <div className="overflow-auto pt-14 ">
             {
                 productInfoArr && 
             
-            <table className="min-w-table-min-width border border-pink-200">
+            <table className="min-w-table-min-width border border-pink-200 dark:border-gray-700">
                 <tr className="h-12 bg-primaryPink text-gray-50">
                     <th className="p-2">Sr. No</th>
                     <th className="p-2">Product</th>
