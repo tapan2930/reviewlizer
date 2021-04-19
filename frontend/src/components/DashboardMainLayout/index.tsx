@@ -97,21 +97,32 @@ const showSavedAndHistory = (userInfo)=>{
     console.log(userInfo)
 
     return (showSaved || showHistory ) ? <> 
-    <div className="grid grid-cols-1 md:grid-cols-2 pt-8">
+    <div className="grid grid-cols-1  md:grid-cols-2 gap-10 md:gap-0  py-8 px-3">
             {
-                showSaved ?  <div  className="flex flex-col items-center"> {/* Saved Container */}
-                <div className="">
-                    <h2 className="border-b border-primaryPink font-semibold inline pb-1">{Saved.title}</h2>
-                    <GridTable products={userInfo.savedProducts} />
+                showSaved ?  <div> {/* Saved Container */}
+                <div className="md:ml-auto w-max md:mr-4">
+                    <h2 className="border-b-4 border-primaryPink font-bold inline pb-1">{Saved.title}</h2>
+                    <div className="mt-10"><GridTable products={userInfo.savedProducts} /></div>
                 </div>
             </div> : null
             }
                
             {
-                showHistory ? <div className="flex flex-col items-center  md:border-l md:border-primaryPink"> { /* previously Searched containrer  */}
-                <div>
-                    <h2 className="border-b border-primaryPink font-semibold inline pb-1">{previouslySearched.title}</h2>
-                    <GridTable products={userInfo.recentlySearchedProducts} />
+                showHistory ? <div className=" md:border-l md:border-primaryPink "> { /* previously Searched containrer  */}
+                <div className="md:ml-4">
+                    <h2 className="border-b-4 border-primaryPink font-bold inline pb-1  ">{previouslySearched.title}</h2>
+                    <div className="mt-10">
+                        {
+                            userInfo.recentlySearchedProducts.map((link,id)=>{
+                                return(
+                                    <div id={`${id}`} >
+                                        <a href={link}><p className="cursor-pointer border-dotted border-b border-primaryPink hover:border-solid my-1">{link.slice(0,40)}{link.length > 40 ? "...": ""}</p></a>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                    
                 </div>
                    
             </div> : null

@@ -40,7 +40,8 @@ module.exports = {
     extend: {
       backgroundColor: ['odd'],
       borderColor:['odd', "hover"],
-      margin:['odd', 'even']
+      margin:['odd', 'even'],
+      borderStyle: ['hover', 'focus'],
     },
   },
   plugins: [],

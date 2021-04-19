@@ -25,16 +25,13 @@ export type productDetailsType =  {
     highlightDetails: Array<highlightDetailsType>
 }
 
-export type prevouslySearchedProductType = {
-    id:string,
-    link: string
-}
+
 
 export type userInfoType = {
     email:string,
     id:string,
     savedProducts: Array<productDetailsType> | null,
-    prevouslySearchedProduct: Array<prevouslySearchedProductType> | null
+    prevouslySearchedProduct: Array<string> | null
 }
 
 

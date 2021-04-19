@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import Router from "next/router";
 import { AiOutlineSearch } from "react-icons/ai";
 import * as ValidUrl from "valid-url"
+import {generate} from "shortid"
 
-import { showAnalysis, useOnSeachData, useSearchValue, useSkeleton } from "../../store/globalStore";
+import { showAnalysis, useOnSeachData, userInfo, useSearchValue, useSkeleton } from "../../store/globalStore";
   
 type propType = {
     onSearch?: (data) => void,
@@ -17,6 +18,7 @@ const SearchBar:React.FC<propType> = ():React.ReactElement => {
   const setData = useOnSeachData(state => state.setData)
   const setShowAnalaysis = showAnalysis(state => state.toggle)
   const [isUrl,setIsUrl] = useState(true)
+  const addToHistory = userInfo(state => state.addHistory)
 
 
   const onSearchButtonHandler = async () => {
@@ -29,7 +31,7 @@ const SearchBar:React.FC<propType> = ():React.ReactElement => {
           Router.push("/dashboard/analysis");
         }
         
-
+      await addToHistory(searchValue)  
   
         setShowAnalaysis(false)
         setSkeletonLoading(true)

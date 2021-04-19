@@ -92,7 +92,7 @@ export type userInfoTypeStore = {
     authUser: (token, userId) => Promise<any>
     addSaved: (token,userId, newProduct) => Promise<Array<productDetailsType>>,
     deleteSaved: (productId) => Promise<Array<productDetailsType>>,
-    // addHistory: (token,userId,productSearched) => Array<prevouslySearchedProductType>
+    addHistory: (productSearched) => Promise<Array<prevouslySearchedProductType>>
 }
 
 export const userInfo = create<userInfoTypeStore>((set,get) => ({
@@ -115,12 +115,17 @@ export const userInfo = create<userInfoTypeStore>((set,get) => ({
         if(res.status === 200){
             set({userData : await {...res.data}})
             console.log(get().userData, "zustand", res.data.savedProducts)
+            return res.data.savedProducts
         }
-        return res.data.savedProducts
+        return null
     },
-    // addHistory: async (token,userId,productSearched) => {
-    //     const res = await addToProductHistory(token,userId,productSearched)
-    //     set({userData : await {...get().userData as {}, prevouslySearchedProduct: res.data}})
-    //     return res.data.prevouslySearchedProduct
-    // }
+    addHistory: async (productSearched) => {
+        const [token,userId] = getUserTokenNId()
+        const res = await addToProductHistory(token,userId,productSearched)
+        if(res.status === 200){
+            set({userData : await {...res.data}})
+            return res.data.prevouslySearchedProduct
+        }
+        return null
+    }
 }))
