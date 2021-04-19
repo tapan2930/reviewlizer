@@ -31,10 +31,9 @@ export type prevouslySearchedProductType = {
 }
 
 export type userInfoType = {
-    name:string,
     email:string,
     id:string,
-    savedProduct: Array<productDetailsType> | null,
+    savedProducts: Array<productDetailsType> | null,
     prevouslySearchedProduct: Array<prevouslySearchedProductType> | null
 }
 

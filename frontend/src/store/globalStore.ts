@@ -3,6 +3,7 @@ import { addToProductHistory } from "../services/updateProductHistory"
 import { addToSavedProduct, deleteFromSavedProduct } from "../services/updateSavedProducts"
 import {prevouslySearchedProductType, productDetailsType, userInfoType} from "../types/userInfo.types"
 import { getUser } from "../utils/auth/helper"
+import getUserTokenNId from "../utils/auth/helper/userTokenNId"
 
 
 
@@ -90,19 +91,17 @@ export type userInfoTypeStore = {
     setUser: (userData) => void
     authUser: (token, userId) => Promise<any>
     addSaved: (token,userId, newProduct) => Promise<Array<productDetailsType>>,
-    deleteSaved: (token,userId,productId) => Promise<Array<productDetailsType>>,
+    deleteSaved: (productId) => Promise<Array<productDetailsType>>,
     // addHistory: (token,userId,productSearched) => Array<prevouslySearchedProductType>
 }
 
 export const userInfo = create<userInfoTypeStore>((set,get) => ({
     userData: null,
     setUser: (userData) =>{
-        console.log("useData", userData)
         set({userData})
     },
     authUser: async (token, userId) => {
         const user =  await getUser(userId, token)
-        console.log("athuser", user)
         return user
     },
     addSaved: async (token,userId, newProduct) =>{
@@ -110,7 +109,8 @@ export const userInfo = create<userInfoTypeStore>((set,get) => ({
         set({ userData: await {...res.data}})
         return res.data.savedProduct
     },
-    deleteSaved: async (token,userId,productId) => {
+    deleteSaved: async (productId) => {
+        const [token,userId] = getUserTokenNId()
         const res = await deleteFromSavedProduct(token,userId, productId)
         if(res.status === 200){
             console.log(get().userData, res.data)

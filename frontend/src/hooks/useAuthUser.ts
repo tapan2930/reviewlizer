@@ -19,7 +19,6 @@ const useAuthUser = (userToken) =>{
         const user_id = localStorage.getItem("user_id")
         const usergetHandler = async (user_id,token)=>{
           let user =  await  userAuth(token, user_id)
-          console.log(user, "hooks")
           if(user.status !== 200){
             clearUserCookies()
             router.push("/account/signin")

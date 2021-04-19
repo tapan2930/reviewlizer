@@ -50,8 +50,6 @@ const SignIn: React.FC = (): React.ReactElement => {
       onSubmit=  { async (formData) =>  {
         setValues({...values, loading:true, success:true, error:false, errorValue:""})
         await signIn(formData).then(res =>{
-          console.log(res)
-        
           if(res.status === 200){
             setValues({...values, loading:false, success:true})
             router.push("/dashboard")

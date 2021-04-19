@@ -12,7 +12,7 @@ const SavedPage :React.FC = (props:any):React.ReactElement => {
     return (
         <DashBoardBase>
           {
-            user ? <SavedPageMainLayout savedProducts={user.savedProducts} /> : null
+            user ? <SavedPageMainLayout /> : null
           }
         </DashBoardBase>
     )

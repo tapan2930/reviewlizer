@@ -58,7 +58,6 @@ export const getUser = (token, id)=>{
         }
     })
     .then( res => {
-      console.log(res.data)
       return res
     })
     .catch( err =>{

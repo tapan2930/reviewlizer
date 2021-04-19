@@ -4,6 +4,9 @@ import {MdDelete} from "react-icons/md"
 import {RiSlideshowFill} from "react-icons/ri"
 import {productDetailsType} from "../../../types/userInfo.types"
 import  ReactTooltip from "react-tooltip";
+import { userInfo } from '../../../store/globalStore'
+import { useEffect } from 'react'
+
 
 
 type propType = {
@@ -11,14 +14,27 @@ type propType = {
 }
 
 
-const SavedTable :React.FC<propType> = ({savedProducts}):React.ReactElement => {
-    let dataArr = savedProducts.map(data=>{
-        return data.productDetails
-    })
+const SavedTable :React.FC = ():React.ReactElement => {
+    const savedProducts = userInfo(state => state.userData.savedProducts)
+    const deleteSaved = userInfo(state => state.deleteSaved)
+    const [productInfoArr, setProductInfoArr] = useState(null)
     
-    const [productInfoArr, setProductInfoArr] = useState(dataArr)
+    // update state when SavedProduct Values change
+    useEffect(()=>{
+        let dataArr = savedProducts.map(data=>{
+            return data.productDetails
+        })
+        setProductInfoArr(dataArr)
+    }, [savedProducts])
+
+    const onDeleteHandler = (productId) =>{
+        deleteSaved(productId)
+    }
     return (
         <div className="overflow-auto pt-14 ">
+            {
+                productInfoArr && 
+            
             <table className="min-w-table-min-width border border-pink-200">
                 <tr className="h-12 bg-primaryPink text-gray-50">
                     <th className="p-2">Sr. No</th>
@@ -37,7 +53,7 @@ const SavedTable :React.FC<propType> = ({savedProducts}):React.ReactElement => {
                                 className="cursor-pointer border-l border-pink-200 dark:border-gray-700 p-2 px-6 text-xl hover:bg-gray-800 hover:text-gray-50 transition-all duration-200" 
                                 data-for='remove' 
                                 data-tip="Remove"
-                                onClick = {}
+                                onClick = {()=> onDeleteHandler(row.id)}
                                 ><MdDelete/></td>
                                 <td className="cursor-pointer border-l border-pink-200 dark:border-gray-700 p-2 px-6 text-xl hover:bg-gray-800 hover:text-gray-50 transition-all duration-200" data-for='showAnalysis' data-tip="Show Analysis"><RiSlideshowFill/></td>
                             </tr>   
@@ -45,6 +61,7 @@ const SavedTable :React.FC<propType> = ({savedProducts}):React.ReactElement => {
                     })
                 }
             </table>  
+            }
             <ReactTooltip id="remove" delayShow={500} />                    
             <ReactTooltip id="showAnalysis" delayShow={500} />                    
         </div>

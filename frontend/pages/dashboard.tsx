@@ -15,12 +15,8 @@ import DashBoardBase from '../src/components/DashBoardBase';
 import useAuthUser from '../src/hooks/useAuthUser';
 
 
-
 const DashBoard = (props)=>{
-
     const user = useAuthUser(props.cookies.userToken)
-
-
     return (
       <DashBoardBase>
           <DashboardMainLayout userInfo = {user} />
