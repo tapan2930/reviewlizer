@@ -120,7 +120,7 @@ def URL_GEN(url:str):
     return urls
 
 
-def main(url:str):
+def get_reviews_from_url(url:str):
     """
     The starting function for scraping. This is a multi-threaded function.
     Input => output: (url)string  => list of reviews
