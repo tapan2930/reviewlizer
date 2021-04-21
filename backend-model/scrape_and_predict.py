@@ -10,6 +10,9 @@ data_json = json.dumps(reviews)
 payload = json.dumps({'reviews': reviews})
 response= requests.post("http://127.0.0.1:8000/api/classify", data=payload)
 labels = json.loads(response.json())
-# print(labels)
-pos_kw,neg_kw = extract_keywords(reviews,labels)
-print(f"Positive keyword: {pos_kw}\n Negative Keywords: {neg_kw}")
+print(labels)
+#pos_kw,neg_kw = extract_keywords(reviews,labels)
+#print(f"Positive keyword: {pos_kw}\n Negative Keywords: {neg_kw}")
+
+# 0 is negative
+# 1 is positive
