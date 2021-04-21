@@ -90,7 +90,7 @@ export type userInfoTypeStore = {
     userData: userInfoType | null,
     setUser: (userData) => void
     authUser: (token, userId) => Promise<any>
-    addSaved: (token,userId, newProduct) => Promise<Array<productDetailsType>>,
+    addSaved: (newProduct) => Promise<Array<productDetailsType>>,
     deleteSaved: (productId) => Promise<Array<productDetailsType>>,
     addHistory: (productSearched) => Promise<Array<string>>
 }
@@ -104,7 +104,8 @@ export const userInfo = create<userInfoTypeStore>((set,get) => ({
         const user =  await getUser(userId, token)
         return user
     },
-    addSaved: async (token,userId, newProduct) =>{
+    addSaved: async (newProduct) =>{
+        const [token,userId] = getUserTokenNId()
         const res = await addToSavedProduct(token,userId, newProduct)
         set({ userData: await {...res.data}})
         return res.data.savedProduct

@@ -1,18 +1,23 @@
 import React, { useState } from "react";
-import Analaysis from "../../../pages/dashboard/analysis";
 import SearchBar from "../SearchBar";
 import HighlightContainer from "./HighlightContainer";
 import ProductDetails from "./ProductDetails";
 import SentimentAnalysisContainer from "./SentimentAnalysis";
-import  {useSkeleton, useOnSeachData, showAnalysis} from "../../store/globalStore"
-
-
+import  {useSkeleton, useOnSeachData, showAnalysis, userInfo} from "../../store/globalStore"
+import {AiFillStar,AiOutlineStar} from "react-icons/ai"
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { on } from "cluster";
 
 
 const AnalysisMainLayout = () => {
   const data = useOnSeachData(state => state.data)
   const isLoading = useSkeleton(state => state.loading)
   const showAnlaysis = showAnalysis(state => state.show)
+  const [isSaved, setIsSaved] = useState(false)
+  const router = useRouter()
+  const {saved} = router.query
+  console.log(saved)
 
   return (
     <div className="container">
@@ -31,7 +36,7 @@ const AnalysisMainLayout = () => {
           console.log(showAnlaysis)
         }
       {
-        showAnlaysis && dataLayout(data)
+        showAnlaysis && <DataLayout data={data}  saved = {(saved === "true")} />
       }
       </main>
     </div>
@@ -56,12 +61,39 @@ const skeleton = <div className="animate-pulse flex w-full border dark:border-gr
   </div>
 </div>
 
+const savedTrue = () => (
+        <div className="shadow-xl bg-white dark:bg-gray-800 fixed right-20 bottom-20 p-3 rounded-xl text-sm font-bold w-24">
+         <div className="flex items-center cursor-pointer"><span className="mr-2 text-lg text-primaryPink"><AiFillStar /></span> Saved </div>
+        </div>)
 
-const dataLayout = (data)=>(
-  <>
-  {
-    console.log("inside the function.", data)
+const saveFalse = () =>(
+  <div className="shadow-xl bg-white dark:bg-gray-800 fixed right-20 bottom-20 p-3 rounded-xl text-sm font-bold w-24">
+  <div className="flex items-center cursor-pointer"><span className="mr-2 text-lg text-primaryPink"><AiOutlineStar /></span> Save </div>
+ </div>
+)
+
+const DataLayout = ({data, saved = false})=>{
+  const [isSaved, setIsSaved] = useState(saved)
+  const addToSave = userInfo(state => state.addSaved)
+  const removeFromSave = userInfo(state => state.deleteSaved)
+  const onSaveClickHandler = () =>{
+    setIsSaved(!isSaved)
+    if(isSaved){
+      addToSave(data).then((res)=>{
+        console.log("added")
+      })
+    }else {
+      removeFromSave(data.id)
+    }
   }
+  return (
+  <div>
+      <div onClick={onSaveClickHandler} className="cursor-pointer">
+        {
+          isSaved ? savedTrue() : saveFalse()
+        }
+      </div>
+       
   <section className=" my-24">
   {/* Product Details component */}
   <h1 className="text-lg font-bold border-primaryPink border-b-2 inline-block mb-2">
@@ -91,7 +123,8 @@ const dataLayout = (data)=>(
         <HighlightContainer highlightDetails = {data.highlightDetails} />
       </div>
 </section>
-</>
+</div>
 )
+  }
 
 export default AnalysisMainLayout;

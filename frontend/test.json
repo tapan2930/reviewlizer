@@ -1,0 +1,32 @@
+{   
+    "id":"a90m0omne0m0m0m11345",
+    "productDetails" : {    
+            "name": "OnePlus S21 5G (Phantom Gray, 8GB, 128GB Storage)",
+            "total_rating":3000,
+            "total_reviews":300,
+            "source":"Amazon",
+            "link":"https://www.amazon.in/Samsung-Phantom-Storage-Additional-Exchange/dp/B08LRGCNDP/ref=sr_1_4?crid=LLGW980X8I2D&dchild=1&keywords=s21&qid=1615037672&sprefix=s2%2Caps%2C303&sr=8-4",
+            "img":"https://images-na.ssl-images-amazon.com/images/I/91BGpV19r0L._SL1500_.jpg"
+        },
+        "sentimentDetails" : [
+            {
+                "id":"positive",
+                "label":"Positive",
+                "value":200
+            },
+            {
+                "id":"negative",
+                "label":"Negative",
+                "value":"60"
+            },
+            {
+                "id":"Neutral",
+                "label":"Neutral",
+                "value":"40"
+            }
+        ],
+        "highlightDetails": {
+            "positive":["Great Sound","battery","sleek design","clear voice","comfortable"],
+            "negative":["Connectivity issues","noice cancelation","broken battery cable","short range"]
+        }
+}
