@@ -1,7 +1,7 @@
 import create from "zustand"
 import { addToProductHistory } from "../services/updateProductHistory"
 import { addToSavedProduct, deleteFromSavedProduct } from "../services/updateSavedProducts"
-import {prevouslySearchedProductType, productDetailsType, userInfoType} from "../types/userInfo.types"
+import {productDetailsType, userInfoType} from "../types/userInfo.types"
 import { getUser } from "../utils/auth/helper"
 import getUserTokenNId from "../utils/auth/helper/userTokenNId"
 
@@ -92,7 +92,7 @@ export type userInfoTypeStore = {
     authUser: (token, userId) => Promise<any>
     addSaved: (token,userId, newProduct) => Promise<Array<productDetailsType>>,
     deleteSaved: (productId) => Promise<Array<productDetailsType>>,
-    addHistory: (productSearched) => Promise<Array<prevouslySearchedProductType>>
+    addHistory: (productSearched) => Promise<Array<string>>
 }
 
 export const userInfo = create<userInfoTypeStore>((set,get) => ({
