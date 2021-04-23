@@ -95,6 +95,8 @@ const showSavedAndHistory = (userInfo)=>{
     let showSaved = userInfo ? (userInfo.savedProducts.length) : false
     let showHistory = userInfo ? (userInfo.recentlySearchedProducts.length ) : false
     console.log(userInfo)
+    let history = userInfo ? (userInfo.recentlySearchedProducts ) : [""]
+    history.reverse()
 
     return (showSaved || showHistory ) ? <> 
     <div className="grid grid-cols-1  md:grid-cols-2 gap-10 md:gap-0  py-8 px-3">
@@ -114,11 +116,11 @@ const showSavedAndHistory = (userInfo)=>{
                     <div className="mt-10">
                         {
                             userInfo.recentlySearchedProducts.map((link,id)=>{
-                                return(
+                                return id < 5 ? (
                                     <div id={`${id}`} >
                                         <a href={link}><p className="cursor-pointer border-dotted border-b border-primaryPink hover:border-solid my-1">{link.slice(0,40)}{link.length > 40 ? "...": ""}</p></a>
                                     </div>
-                                )
+                                ) : null
                             })
                         }
                     </div>
