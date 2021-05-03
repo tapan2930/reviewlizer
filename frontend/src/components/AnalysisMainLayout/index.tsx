@@ -7,17 +7,28 @@ import  {useSkeleton, useOnSeachData, showAnalysis, userInfo} from "../../store/
 import {AiFillStar,AiOutlineStar} from "react-icons/ai"
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { on } from "cluster";
-
 
 const AnalysisMainLayout = () => {
   const data = useOnSeachData(state => state.data)
+  const userData = userInfo(state => state.userData)
   const isLoading = useSkeleton(state => state.loading)
   const showAnlaysis = showAnalysis(state => state.show)
-  const [isSaved, setIsSaved] = useState(false)
   const router = useRouter()
-  const {saved} = router.query
-  console.log(saved)
+  const params = router.query
+  console.log(params, "params")
+
+  const savedData = ()=>{
+    console.log
+    if(params.saved ? params.saved === 'true' : false){
+      const data = userData.savedProducts.filter((p)=>{
+        return p.id === params.pid
+      })
+      console.log(data)
+      return data[0]
+    }
+    return;
+  }
+ 
 
   return (
     <div className="container">
@@ -27,16 +38,12 @@ const AnalysisMainLayout = () => {
         </div>
       </div>
 
-      {/* Display after press search */}
       <main>
         {
           isLoading && skeleton
         }
-        {
-          console.log(showAnlaysis)
-        }
       {
-        showAnlaysis && <DataLayout data={data}  saved = {(saved === "true")} />
+        (params.saved ? params.saved === 'true' : false || showAnlaysis) && <DataLayout data={params.saved === "true" ? savedData() : data} saved={  params.saved ? params.saved === "true" : false} />
       }
       </main>
     </div>
@@ -74,10 +81,24 @@ const saveFalse = () =>(
 
 const DataLayout = ({data, saved = false})=>{
   const [isSaved, setIsSaved] = useState(saved)
+  const toggleSaved:any = () => {
+    setIsSaved(currentState => !currentState)
+
+    setIsSaved((state) => {
+      console.log(state); // "React is awesome!"
+      return state;
+    })
+
+  }
+  console.log(isSaved)
   const addToSave = userInfo(state => state.addSaved)
   const removeFromSave = userInfo(state => state.deleteSaved)
   const onSaveClickHandler = () =>{
-    setIsSaved(!isSaved)
+    toggleSaved()
+  }
+
+  useEffect(()=>{
+    console.log("Inside if",isSaved)
     if(isSaved){
       addToSave(data).then((res)=>{
         console.log("added")
@@ -85,7 +106,8 @@ const DataLayout = ({data, saved = false})=>{
     }else {
       removeFromSave(data.id)
     }
-  }
+  },[isSaved])
+
   return (
   <div>
       <div onClick={onSaveClickHandler} className="cursor-pointer">

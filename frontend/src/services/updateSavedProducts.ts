@@ -6,8 +6,9 @@ const API = process.env.NODE_ENV === "production" ? process.env.API : process.en
 
 export const addToSavedProduct = (token,userId, newProduct)=>{
     let productData = {...newProduct,id:generate()}
+
     console.log("Product to be added:", productData)
-    return axios.post(`${API}/updateSaved/add/${userId}/`, JSON.stringify(productData), {
+    return axios.put(`${API}user/updateSaved/add/${userId}/`, JSON.stringify(productData), {
         headers:{
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`

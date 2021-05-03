@@ -6,6 +6,7 @@ import  ReactTooltip from "react-tooltip";
 import { userInfo } from '../../../store/globalStore'
 import { useEffect } from 'react'
 import ProgressBar from "@badrap/bar-of-progress"
+import { useRouter } from 'next/router';
 
 
 const deleteLoadingBar = new ProgressBar({
@@ -20,6 +21,7 @@ const SavedTable :React.FC = ():React.ReactElement => {
     const savedProducts = userInfo(state => state.userData.savedProducts)
     const deleteSaved = userInfo(state => state.deleteSaved)
     const [productInfoArr, setProductInfoArr] = useState(null)
+    const router = useRouter()
     
     const dataArrFun = (savedProducts) =>{
         return  savedProducts.map(data=>{
@@ -43,8 +45,18 @@ const SavedTable :React.FC = ():React.ReactElement => {
             setProductInfoArr(updatedData)
             deleteLoadingBar.finish()
         })
-
     }
+
+    const viewProductButtonHandler = (productId) =>{
+        router.push({
+            pathname:"/dashboard/analysis",
+            query:{
+                saved:true,
+                pid:productId
+            }
+        })
+    }
+
     return (
         <div className="overflow-auto pt-14 ">
             {
@@ -62,7 +74,13 @@ const SavedTable :React.FC = ():React.ReactElement => {
                         return (
                             <tr className="border-b  h-12 odd:bg-secondaryPink border-pink-200 dark:border-gray-700">
                                 <td className="border-l border-pink-200 dark:border-gray-700 p-2 px-6">{id+1}</td>
-                                <td className="border-l border-pink-200 dark:border-gray-700 p-2 px-6">{row.name}</td>
+                                <td className="border-l border-pink-200 dark:border-gray-700 p-2 px-6">
+                                    <div className="flex items-center">
+                                    <img className="w-6 mr-4" src={row.img} alt={row.name} />
+                                    {row.name}
+                                    </div>
+                                    
+                                    </td>
                                 <td className="border-l border-pink-200 dark:border-gray-700 p-2 px-6"><a href={row.link} className="border-dotted border-b border-primaryPink text-sm">{row.source}</a></td>
                                 <td 
                                 className="cursor-pointer border-l border-pink-200 dark:border-gray-700 p-2 px-6 text-xl hover:bg-gray-800 hover:text-gray-50 transition-all duration-200" 
@@ -70,7 +88,13 @@ const SavedTable :React.FC = ():React.ReactElement => {
                                 data-tip="Remove"
                                 onClick = {()=> onDeleteHandler(row.id)}
                                 ><MdDelete/></td>
-                                <td className="cursor-pointer border-l border-pink-200 dark:border-gray-700 p-2 px-6 text-xl hover:bg-gray-800 hover:text-gray-50 transition-all duration-200" data-for='showAnalysis' data-tip="Show Analysis"><RiSlideshowFill/></td>
+                                <td 
+                                onClick = {()=> viewProductButtonHandler(row.id)}
+                                className="cursor-pointer border-l border-pink-200 dark:border-gray-700 p-2 px-6 text-xl hover:bg-gray-800 hover:text-gray-50 transition-all duration-200"
+                                data-for='showAnalysis'
+                                data-tip="Show Analysis">
+                                    <RiSlideshowFill/>
+                                </td>
                             </tr>   
                         )
                     })

@@ -86,7 +86,7 @@ const SearchBar:React.FC<propType> = ():React.ReactElement => {
 
 const TesterFunction = () => {
     let data = {
-        id:"12wsdfret",
+        id:null,
         productDetails : {
             name: "Samsung Galaxy S21 5G (Phantom Gray, 8GB, 128GB Storage)",
             total_rating:3000,
